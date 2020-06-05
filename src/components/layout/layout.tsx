@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
 import "./layout.css";
 import Header from '../header/header';
-// import Footer from '../footer/footer';
+import Footer from '../footer/footer';
 // import Menu from '../menu/menu';
-// import Login from '../login/login';
+import Login from '../login/login';
 // import Coupons from '../coupons/coupons';
 // import About from '../about/about';
 
@@ -28,16 +28,16 @@ export default class Layout extends Component{
                     <main>
                         <Switch>
                             {/* <Route path="/about" component={About} exact /> */}
-                            {/* <Route path="/home" component={Login} exact /> */}
+                            <Route path="/home" component={Login} exact />
                             {/* <Route path="/coupons" component={Coupons} exact /> */}
                             <Redirect from="/" to="/home" exact />
                             {/* <Route component={PageNotFound} /> */}
                         </Switch>
                     </main>
 
-                    {/* <footer>
+                    <footer>
                         <Footer />
-                    </footer> */}
+                    </footer>
                 </section>
             </BrowserRouter >
         );

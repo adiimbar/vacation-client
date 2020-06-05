@@ -21,7 +21,6 @@ interface AboutProps {
     displayedText: string;
 }
 
-
 export default class Header extends Component<AboutProps>{
     public constructor(props: AboutProps) {
         super(props);
