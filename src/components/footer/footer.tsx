@@ -4,8 +4,7 @@ import './footer.css';
 export default class Footer extends Component {
     public render() {
         return (
-            <div className="footer">
-                <p>All Rights Reserved &copy;</p>
-            </div>);
+            <div className="footer">All Rights Reserved &copy;</div>
+        );
     }
 }

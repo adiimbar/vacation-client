@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
+import 'antd/dist/antd.css';
+import { Modal, Button } from 'antd';
 // import { useFormik } from 'formik';
 import './login.css';
 
 export default class Login extends Component {
 
+    public constructor(props: any) {
+        super(props);
+
+        // this.state = {}
+    }
+    
     // // const formik = useFormik({
     // formik = useFormik({
     //     initialValues: {

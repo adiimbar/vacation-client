@@ -3,6 +3,49 @@
     padding:0;
     min-height: 100%;
     border: 2px solid black;
+    background-color: #71A9F7;
+    text-align: center;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); 
+    grid-template-rows: 10% 85% 5%; 
+}
+
+.layout> * {
+    border: 2px solid black;
+}
+
+.layout>header {
+    grid-column: span 12;
+}
+
+.layout>main {
+    grid-column: span 12;
+    background: #fff;
+    padding: 24px 50px;
+    /* min-height: 280px; */
+}
+
+.layout>footer {
+    grid-column: span 12;
+}
+
+/* 
+.site-layout-content {
+    background: #fff;
+    padding: 24px;
+    min-height: 280px;
+} */
+
+
+
+
+
+/* .layout {
+    margin:0;
+    padding:0;
+    min-height: 100%;
+    border: 2px solid black;
     background-color: lightgreen;
     text-align: center;
     box-sizing: border-box;
@@ -26,4 +69,6 @@
 .layout>main {
     grid-column: span 10;   
 } 
+ */
+
 
