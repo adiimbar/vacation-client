@@ -1,0 +1,10 @@
+/* .cardsContainer {
+    float: left;
+} */
+
+.cardDiv {
+    margin: 20px;
+    float: left;
+
+  /* background: #ececec; */
+}
