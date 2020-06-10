@@ -39,8 +39,17 @@ export default class Login extends Component<any, UserLoginDetails, SuccessfulLo
             const serverResponse = response.data;
             console.log(serverResponse);
             sessionStorage.setItem("token", "Bearer " + serverResponse.token + "");
-            const userType = serverResponse.userType;
-            console.log(userType);
+            // const userType = serverResponse.userType;
+            // console.log(userType);
+
+            if (serverResponse.userType === "ADMIN") {
+                this.props.history.push('/admin');
+                // sessionStorage.setItem("userType", "ADMIN");
+            }
+            else if (serverResponse.userType === "CUSTOMER") {
+                this.props.history.push('/main');
+                // sessionStorage.setItem("userType", "CUSTOMER");
+            }
 
         }
         catch (err) {
