@@ -1,61 +1,64 @@
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+// import { Formik, Form, Field, ErrorMessage } from 'formik';
+// import * as Yup from 'yup';
 //   import TextError from './TextError';
-import { Button } from 'antd';
 // import { OmitProps } from 'antd/lib/transfer/ListBody';
 
 
-const initialValues = {
-    userName: '',
-    password: ''
-}
+import { Form, Input, Button } from 'antd';
 
-const onSubmit = (values: any) => {
-    console.log(values);
-}
+const layout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
+};
+const tailLayout = {
+    wrapperCol: { offset: 8, span: 16 },
+};
 
-const validationSchema = Yup.object({
-    userName: Yup.string().required('Required'),
-    password: Yup.string()
-    //   .email('Invalid password format')
-      .required('Required'),
-  })
+const LoginForm = (props: any) => {
+    const onFinish = (values: any) => {
+        console.log('Success:', values);
+        props.loginHandler(values)
+    };
 
+    const onFinishFailed = (errorInfo: any) => {
+        console.log('Failed:', errorInfo);
+    };
 
-
-function LoginForm (props: any) {
-    
     return (
-        <Formik 
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={onSubmit}>
+        <Form
+            {...layout}
+            name="basic"
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+        >
+            <Form.Item
+                label="Username"
+                name="userName"
+                rules={[{ required: true, message: 'Please input your username!' }]}
+            >
+                <Input />
+            </Form.Item>
 
-        <Form>
-            <div className='form-control'>
-                <Field
-                    type='text'
-                    placeholder='User name'
-                    name='userName'
-                />
-                <ErrorMessage name='userName' />
-            </div>
-            <div>
-                <Field
-                    type='password'
-                    placeholder='Password'
-                    name='password'
-                />
-                <ErrorMessage name='password' />
-            </div>
+            <Form.Item
+                label="Password"
+                name="password"
+                rules={[{ required: true, message: 'Please input your password!' }]}
+            >
+                <Input.Password />
+            </Form.Item>
 
-            {/* <Button type="primary" htmlType="submit">login</Button> */}
-            <button type='submit' onClick={props.loginHandler}>login</button>
 
+            <Form.Item {...tailLayout}>
+                <Button type="primary" htmlType="submit">
+                    Submit
+                    </Button>
+            </Form.Item>
         </Form>
-    </Formik>
+
+
     )
+
 }
 
 export default LoginForm

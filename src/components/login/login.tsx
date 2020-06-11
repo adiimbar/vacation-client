@@ -21,7 +21,7 @@ export default class Login extends Component<any, UserLoginDetails, SuccessfulLo
             password: ''
         }
 
-        this.loginDummy = this.loginDummy.bind(this);
+        this.login = this.login.bind(this);
     }
 
     private setUserName = (args: ChangeEvent<HTMLInputElement>) => {
@@ -34,10 +34,10 @@ export default class Login extends Component<any, UserLoginDetails, SuccessfulLo
         this.setState({ password });
     }
 
-    private login = async () => {
+    private login = async (loginObject: any) => {
 
         try {
-            let userLoginDetails = new UserLoginDetails(this.state.userName, this.state.password);
+            let userLoginDetails = new UserLoginDetails(loginObject.userName, loginObject.password);
             const response = await axios.post<UserLoginDetails[], AxiosResponse<SuccessfulLoginServerResponse>>("http://localhost:3001/users/login", userLoginDetails);
             const serverResponse = response.data;
             console.log(serverResponse);
@@ -59,10 +59,6 @@ export default class Login extends Component<any, UserLoginDetails, SuccessfulLo
             alert(err.message);
             console.log(err);
         }
-    }
-
-    loginDummy() {
-        console.log('login dummy was clicked')
     }
 
     public render() {
@@ -91,7 +87,7 @@ export default class Login extends Component<any, UserLoginDetails, SuccessfulLo
                 <br></br>
 
                 {/* <LoginForm loginHandler={this.loginDummy} /> */}
-                <LoginForm loginHandler={this.loginDummy} />
+                <LoginForm loginHandler={this.login} />
                 <Register />
             </div>
         );
