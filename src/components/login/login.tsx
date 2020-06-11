@@ -7,6 +7,7 @@ import 'antd/dist/antd.css';
 // import { Button } from 'antd';
 // import { useFormik } from 'formik';
 import Register from '../register/register';
+import LoginForm from '../forms/login-form/loginForm';
 import './login.css';
 
 
@@ -19,6 +20,8 @@ export default class Login extends Component<any, UserLoginDetails, SuccessfulLo
             userName: '',
             password: ''
         }
+
+        this.loginDummy = this.loginDummy.bind(this);
     }
 
     private setUserName = (args: ChangeEvent<HTMLInputElement>) => {
@@ -58,6 +61,9 @@ export default class Login extends Component<any, UserLoginDetails, SuccessfulLo
         }
     }
 
+    loginDummy() {
+        console.log('login dummy was clicked')
+    }
 
     public render() {
         const { userName, password } = this.state;
@@ -74,9 +80,19 @@ export default class Login extends Component<any, UserLoginDetails, SuccessfulLo
                     <input type='button' value='login' onClick={this.login} />
 
                     {/* <button value='login' onClick={this.login}>login</button> */}
-                    <Register />
+                    {/* <Register /> */}
                     {/* <button onClick={this.registerClick} type='button'>Register</button> */}
                 </form>
+
+
+
+                <br></br>
+                <br></br>
+                <br></br>
+
+                {/* <LoginForm loginHandler={this.loginDummy} /> */}
+                <LoginForm loginHandler={this.loginDummy} />
+                <Register />
             </div>
         );
     }
