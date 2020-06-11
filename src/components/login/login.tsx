@@ -1,4 +1,4 @@
-import React, { Component, ChangeEvent } from 'react';
+import React, { Component } from 'react';
 import axios from "axios";
 import { AxiosResponse } from 'axios'
 import { UserLoginDetails } from '../../models/UserLoginDetails';
@@ -17,21 +17,10 @@ export default class Login extends Component<any, UserLoginDetails, SuccessfulLo
         super(props);
 
         this.state = {
-            userName: '',
-            password: ''
+ 
         }
 
         this.login = this.login.bind(this);
-    }
-
-    private setUserName = (args: ChangeEvent<HTMLInputElement>) => {
-        const userName = args.target.value;
-        this.setState({ userName });
-    }
-
-    private setPassword = (args: ChangeEvent<HTMLInputElement>) => {
-        const password = args.target.value;
-        this.setState({ password });
     }
 
     private login = async (loginObject: any) => {
@@ -62,31 +51,9 @@ export default class Login extends Component<any, UserLoginDetails, SuccessfulLo
     }
 
     public render() {
-        const { userName, password } = this.state;
 
         return (
             <div className='login'>
-                <form>
-                    <div>
-                        <input type='text' placeholder='User name' name='userName' value={userName} onChange={this.setUserName} />
-                    </div>
-                    <div>
-                        <input type='password' placeholder='Password' name='password' value={password} onChange={this.setPassword} />
-                    </div>
-                    <input type='button' value='login' onClick={this.login} />
-
-                    {/* <button value='login' onClick={this.login}>login</button> */}
-                    {/* <Register /> */}
-                    {/* <button onClick={this.registerClick} type='button'>Register</button> */}
-                </form>
-
-
-
-                <br></br>
-                <br></br>
-                <br></br>
-
-                {/* <LoginForm loginHandler={this.loginDummy} /> */}
                 <LoginForm loginHandler={this.login} />
                 <Register />
             </div>

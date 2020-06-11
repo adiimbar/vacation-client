@@ -8,8 +8,7 @@ import React from 'react';
 import { Form, Input, Button } from 'antd';
 
 const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
+    wrapperCol: { span: 8 },
 };
 const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
@@ -21,38 +20,34 @@ const LoginForm = (props: any) => {
         props.loginHandler(values)
     };
 
-    const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
-    };
+    // const onFinishFailed = (errorInfo: any) => {
+    //     console.log('Failed:', errorInfo);
+    // };
 
     return (
         <Form
             {...layout}
-            name="basic"
+            name="loginForm"
             onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
+            // onFinishFailed={onFinishFailed}
         >
             <Form.Item
-                label="Username"
                 name="userName"
-                rules={[{ required: true, message: 'Please input your username!' }]}
+                rules={[{ required: true, message: 'Please enter username' }]}
             >
-                <Input />
+                <Input placeholder="Username" />
             </Form.Item>
 
             <Form.Item
-                label="Password"
                 name="password"
-                rules={[{ required: true, message: 'Please input your password!' }]}
+                rules={[{ required: true, message: 'Please enter password' }]}
             >
-                <Input.Password />
+                <Input.Password placeholder="Password" />
             </Form.Item>
 
 
             <Form.Item {...tailLayout}>
-                <Button type="primary" htmlType="submit">
-                    Submit
-                    </Button>
+                <Button type="primary" htmlType="submit">login</Button>
             </Form.Item>
         </Form>
 

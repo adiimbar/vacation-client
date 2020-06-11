@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
+import axios from "axios";
+import { UserRegistrationDetails } from '../../models/UserRegistrationDetails';
 import 'antd/dist/antd.css';
-import { Modal, Button } from 'antd';
+import { Modal, Button, message } from 'antd';
+import RegistrationForm from '../forms/register-form/registerForm';
 import './register.css';
 
 interface RegisterState {
   visible: boolean,
   confirmLoading: boolean,
+
 }
 
-export default class Register extends Component<any, RegisterState> {
+export default class Register extends Component<any, RegisterState, UserRegistrationDetails> {
 
   constructor(props: any) {
     super(props);
@@ -17,6 +21,8 @@ export default class Register extends Component<any, RegisterState> {
       visible: false,
       confirmLoading: false,
     };
+
+    // this.handleOk = this.handleOk.bind(this);
   }
 
   showModal = () => {
@@ -35,6 +41,9 @@ export default class Register extends Component<any, RegisterState> {
         visible: false,
         confirmLoading: false,
       });
+      // this.register();
+      this.successfulRegistrationMessage();
+      ;
     }, 2000);
   };
 
@@ -45,6 +54,32 @@ export default class Register extends Component<any, RegisterState> {
     });
   };
 
+  successfulRegistrationMessage = () => {
+    message.success('Registered successfully. please login...!', 3);
+  };
+
+
+  private register = async (registerObject: any) => {
+
+    console.log('inside register');
+    console.log(registerObject);
+
+    try {
+        let userRegistrationDetails = new UserRegistrationDetails(                                                                
+          registerObject.firstName,
+          registerObject.lastName,
+          registerObject.userName,
+          registerObject.password);
+        const response = await axios.post<UserRegistrationDetails[]>("http://localhost:3001/users/register", userRegistrationDetails);
+        const serverResponse = response.data;
+        console.log(serverResponse);
+
+    }
+    catch (err) {
+        alert(err.message);
+        console.log(err);
+    }
+}
 
 
   public render() {
@@ -54,7 +89,7 @@ export default class Register extends Component<any, RegisterState> {
       <React.Fragment>
         <Button onClick={this.showModal}>
           register
-                </Button>
+        </Button>
 
         <Modal
           title="Title"
@@ -62,156 +97,19 @@ export default class Register extends Component<any, RegisterState> {
           onOk={this.handleOk}
           confirmLoading={confirmLoading}
           onCancel={this.handleCancel}
+          footer={[
+            <Button key="back" onClick={this.handleCancel}>
+              Return
+            </Button>,
+            <Button key="submit" type="primary" loading={confirmLoading} onClick={this.handleOk}>
+              Submit
+            </Button>,
+          ]}
         >
-          
-          
-          
-
-
-
+          <RegistrationForm registrationHandler={this.register} />
         </Modal>
       </React.Fragment>
       // </div>
     );
   }
 }
-
-
-
-
-
-
-
-
-// code for the register form:
-
-// import React, { useState } from 'react';
-// import ReactDOM from 'react-dom';
-// import 'antd/dist/antd.css';
-// import './index.css';
-// import {
-//   Form,
-//   Input,
-//   Row,
-//   Col,
-//   Button,
-// } from 'antd';
-// import { QuestionCircleOutlined } from '@ant-design/icons';
-
-// const formItemLayout = {
-//   labelCol: {
-//     xs: {
-//       span: 24,
-//     },
-//     sm: {
-//       span: 8,
-//     },
-//   },
-//   wrapperCol: {
-//     xs: {
-//       span: 24,
-//     },
-//     sm: {
-//       span: 16,
-//     },
-//   },
-// };
-// const tailFormItemLayout = {
-//   wrapperCol: {
-//     xs: {
-//       span: 24,
-//       offset: 0,
-//     },
-//     sm: {
-//       span: 16,
-//       offset: 8,
-//     },
-//   },
-// };
-
-// const RegistrationForm = () => {
-//   const [form] = Form.useForm();
-
-//   const onFinish = values => {
-//     console.log('Received values of form: ', values);
-//   };
-
-
-//   return (
-//     <Form
-//       {...formItemLayout}
-//       form={form}
-//       name="register"
-//       onFinish={onFinish}
-//       initialValues={{
-//         residence: ['zhejiang', 'hangzhou', 'xihu'],
-//         prefix: '86',
-//       }}
-//       scrollToFirstError
-//     >
-//       <Form.Item
-//         name="email"
-//         label="E-mail"
-//         rules={[
-//           {
-//             type: 'email',
-//             message: 'The input is not valid E-mail!',
-//           },
-//           {
-//             required: true,
-//             message: 'Please input your E-mail!',
-//           },
-//         ]}
-//       >
-//         <Input />
-//       </Form.Item>
-
-//       <Form.Item
-//         name="password"
-//         label="Password"
-//         rules={[
-//           {
-//             required: true,
-//             message: 'Please input your password!',
-//           },
-//         ]}
-//         hasFeedback
-//       >
-//         <Input.Password />
-//       </Form.Item>
-
-//       <Form.Item
-//         name="confirm"
-//         label="Confirm Password"
-//         dependencies={['password']}
-//         hasFeedback
-//         rules={[
-//           {
-//             required: true,
-//             message: 'Please confirm your password!',
-//           },
-//           ({ getFieldValue }) => ({
-//             validator(rule, value) {
-//               if (!value || getFieldValue('password') === value) {
-//                 return Promise.resolve();
-//               }
-
-//               return Promise.reject('The two passwords that you entered do not match!');
-//             },
-//           }),
-//         ]}
-//       >
-//         <Input.Password />
-//       </Form.Item>
-
-      
-//       <Form.Item {...tailFormItemLayout}>
-//         <Button type="primary" htmlType="submit">
-//           Register
-//         </Button>
-//       </Form.Item>
-//     </Form>
-//   );
-// };
-
-// ReactDOM.render(<RegistrationForm />, document.getElementById('container'));
