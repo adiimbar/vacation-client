@@ -72,12 +72,15 @@ export default class Register extends Component<any, RegisterState, UserRegistra
           registerObject.password);
         const response = await axios.post<UserRegistrationDetails[]>("http://localhost:3001/users/register", userRegistrationDetails);
         const serverResponse = response.data;
+        const statusResponse = response.status;
         console.log(serverResponse);
+        console.log(statusResponse);
 
     }
     catch (err) {
-        alert(err.message);
+        // alert(err.message);
         console.log(err);
+        console.log(err.response.status);
     }
 }
 
@@ -92,19 +95,20 @@ export default class Register extends Component<any, RegisterState, UserRegistra
         </Button>
 
         <Modal
-          title="Title"
+          // title="Title"
           visible={visible}
           onOk={this.handleOk}
           confirmLoading={confirmLoading}
           onCancel={this.handleCancel}
-          footer={[
-            <Button key="back" onClick={this.handleCancel}>
-              Return
-            </Button>,
-            <Button key="submit" type="primary" loading={confirmLoading} onClick={this.handleOk}>
-              Submit
-            </Button>,
-          ]}
+          footer={null}
+          // footer={[
+            // <Button key="back" onClick={this.handleCancel}>
+            //   Cancel
+            // </Button>,
+            // <Button key="submit" type="primary" loading={confirmLoading} onClick={this.handleOk}>
+            //   Submit
+            // </Button>,
+          // ]}
         >
           <RegistrationForm registrationHandler={this.register} />
         </Modal>

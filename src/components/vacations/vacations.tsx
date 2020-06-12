@@ -42,7 +42,6 @@ export default class Vacations extends Component <any, VacationsInterface>{
                 {this.state.vacations.map((vacation) => 
 
 
-
                     <Card
                         className='cardDiv'
                         key={vacation.id}
@@ -61,11 +60,11 @@ export default class Vacations extends Component <any, VacationsInterface>{
                     >
                         <Meta
                         title={vacation.destination}
-                        description={`from: ${vacation.start_date} until: ${vacation.end_date}`}
+                        description={`from: ${vacation.start_date.toString().slice(0, 10)} until: ${vacation.end_date.toString().slice(0, 10)}`}
                         />
 
-                        {/* <br></br> */}
                         <div>
+                            <p></p>
                             <p className="description">{vacation.description}</p>
                             <p className="price">{`price: ${vacation.price}`}</p>
                         </div>
