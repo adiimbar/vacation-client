@@ -1,5 +1,4 @@
-// import React, { useState } from 'react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Input, Button } from 'antd';
 
 
@@ -27,11 +26,19 @@ const tailFormItemLayout = {
     },
 };
 
+
+
 const RegistrationForm = (props: any) => {
     // const [form] = Form.useForm();
+    let firstNameInput: any = null;
 
+    useEffect( () => {
+        firstNameInput.focus();
+    })
+    
+    
     const onFinish = (values: any) => {
-        console.log('Received values of form: ', values);
+        // console.log('Received values of form: ', values);
           props.registrationHandler(values);
     };
 
@@ -48,7 +55,12 @@ const RegistrationForm = (props: any) => {
                 name="firstName"
                 rules={[{ required: true, message: 'Please enter first name' }]}
             >
-                <Input placeholder="First name" />
+                <Input 
+                    placeholder="First name"
+                    ref={input => {
+                        firstNameInput = input;
+                      }}
+                />
             </Form.Item>
 
 
