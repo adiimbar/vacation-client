@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import axios from "axios";
 import './vacations.css';
 import { VacationsDetails } from '../../models/VacationsDetails';
+import { Unsubscribe } from "redux";
+import { store } from '../../redux/store';
+import { ActionType } from '../../redux/action-type';
 
 import { Card } from 'antd';
 import { EditOutlined, EllipsisOutlined, CheckOutlined } from '@ant-design/icons';
@@ -9,20 +12,33 @@ import { EditOutlined, EllipsisOutlined, CheckOutlined } from '@ant-design/icons
 
 const { Meta } = Card;
 
-interface VacationsInterface {
+interface VacationsState {
     vacations: VacationsDetails[]
 }
 
 
-export default class Vacations extends Component <any, VacationsInterface>{
+export default class Vacations extends Component <any, VacationsState>{
+
+    private unsubscribeStore: Unsubscribe;
 
     constructor(props: any) {
         super(props);
         this.state = {
             vacations:[]
         };
+
+        this.unsubscribeStore = store.subscribe(
+            // In fact, the following function is our "listener", "refresh function"
+            () => this.setState(
+            {
+                vacations: store.getState().vacations
+            })
+        );
     }
 
+    componentWillUnmount(){
+        this.unsubscribeStore();
+    }
     
     public async componentDidMount() {
         this.getVacations();
@@ -30,8 +46,9 @@ export default class Vacations extends Component <any, VacationsInterface>{
 
     getVacations = async () => {
         const response = await axios.get<VacationsDetails[]>("http://localhost:3001/tours/");
-        this.setState({ vacations: response.data });
-        console.log(this.state.vacations);
+        store.dispatch({ type: ActionType.GetAllVacations, payload: response.data});
+        // this.setState({ vacations: response.data });
+        // console.log(this.state.vacations);
     }
 
 
