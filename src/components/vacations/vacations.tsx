@@ -6,8 +6,7 @@ import { Unsubscribe } from "redux";
 import { store } from '../../redux/store';
 import { ActionType } from '../../redux/action-type';
 
-import { Card } from 'antd';
-import { EditOutlined, EllipsisOutlined, CheckOutlined } from '@ant-design/icons';
+import { Card, Button } from 'antd';
 
 
 const { Meta } = Card;
@@ -69,21 +68,22 @@ export default class Vacations extends Component <any, VacationsState>{
                             src={vacation.image_path}
                         />
                         }
-                        actions={[
-                        <CheckOutlined key="follow" />,
-                        <EditOutlined key="edit" />,
-                        <EllipsisOutlined key="ellipsis" />,
-                        ]}
                     >
                         <Meta
+                        avatar={<Button type="primary" shape="round">follow</Button>}
                         title={vacation.destination}
-                        description={`from: ${vacation.start_date.toString().slice(0, 10)} until: ${vacation.end_date.toString().slice(0, 10)}`}
                         />
 
-                        <div>
+                        <div className='userCardBodyStyle'>
                             <p></p>
                             <p className="description">{vacation.description}</p>
-                            <p className="price">{`price: ${vacation.price}`}</p>
+                            <p className="details">
+                                {`from: ${vacation.start_date.toString().slice(0, 10)} until: ${vacation.end_date.toString().slice(0, 10)}`}
+                                <br></br>
+                                {`price: ${vacation.price}`}
+                                <br></br>
+                                <b  className="followersClass">{`followers: ${vacation.followers}`}</b>
+                                </p>
                         </div>
                     </Card>
 

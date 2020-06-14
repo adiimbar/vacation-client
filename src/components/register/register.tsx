@@ -70,6 +70,7 @@ export default class Register extends Component<any, RegisterState, UserRegistra
           registerObject.lastName,
           registerObject.userName,
           registerObject.password);
+          
         const response = await axios.post<UserRegistrationDetails[]>("http://localhost:3001/users/register", userRegistrationDetails);
         const serverResponse = response.data;
         const statusResponse = response.status;

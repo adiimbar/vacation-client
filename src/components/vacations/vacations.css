@@ -1,10 +1,13 @@
-/* .cardsContainer {
-    float: left;
-} */
 
 .cardDiv {
     margin: 20px;
     float: left;
+}
 
-  /* background: #ececec; */
+.userCardBodyStyle {
+  height: 130px;
+}
+
+.followersClass {
+  color: #1890ff;
 }
