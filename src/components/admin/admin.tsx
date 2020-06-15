@@ -7,10 +7,11 @@ import { store } from '../../redux/store';
 import { ActionType } from '../../redux/action-type';
 
 import { Card, Button } from 'antd';
-import { EditOutlined, EllipsisOutlined, CheckOutlined } from '@ant-design/icons';
+import { EditOutlined } from '@ant-design/icons';
 
 // import VacationsCards from '../vacationsFunction/vacations';
 
+import Charts from '../charts/charts';
 
 const { Meta } = Card;
 
@@ -58,6 +59,11 @@ export default class Admin extends Component <any, VacationsState>{
         return (
             <div className='cardsContainer'>
                 
+
+                {/* <Charts /> */}
+
+
+
                 {this.state.vacations.map((vacation) => 
 
 
@@ -82,15 +88,20 @@ export default class Admin extends Component <any, VacationsState>{
                         />
 
                         <div className='adminCardBodyStyle'>
-                            <p></p>
+                            {/* <p /> */}
+                            <br />
                             <p className="description">{vacation.description}</p>
-                            <p className="details">
-                                {`from: ${vacation.start_date.toString().slice(0, 10)} until: ${vacation.end_date.toString().slice(0, 10)}`}
-                                <br></br>
+                            <div className="detailsClass">
+                                {/* {`from: ${vacation.start_date.toString().slice(0, 10)} until: ${vacation.end_date.toString().slice(0, 10)}`} */}
+                                {/* <br></br> */}
+                                <div className="priceClass">
                                 {`price: ${vacation.price}`}
-                                <br></br>
-                                <b  className="followersClass">{`followers: ${vacation.followers}`}</b>
-                                </p>
+                                </div>
+                                {/* <br></br> */}
+                                <div className="followersClass">
+                                {`followers: ${vacation.followers}`}
+                                </div>
+                            </div>
                         </div>
                     </Card>
 

@@ -8,6 +8,14 @@
   height: 130px;
 }
 
+.detailsClass {
+  font-weight: bold;}
+
+.priceClass {
+  float: left;
+}
+
 .followersClass {
+  float: right;
   color: #1890ff;
 }

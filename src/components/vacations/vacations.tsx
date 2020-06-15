@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from "axios";
 import './vacations.css';
 import { VacationsDetails } from '../../models/VacationsDetails';
+import { FollowDetails } from '../../models/FollowDetails';
 import { Unsubscribe } from "redux";
 import { store } from '../../redux/store';
 import { ActionType } from '../../redux/action-type';
@@ -11,8 +12,26 @@ import { Card, Button } from 'antd';
 
 const { Meta } = Card;
 
+// axios.defaults.baseURL = 'http://localhost:3001/';
+// let token = sessionStorage.getItem('token');
+// console.log('logging token');
+// console.log(token);
+// axios.defaults.headers.commom = {'Authorization': `Bearer ${token}`};
+
+// Add a request interceptor
+axios.interceptors.request.use(function (config) {
+    let token = sessionStorage.getItem('token');
+    // const token = store.getState().session.token;
+    config.headers.Authorization = token;
+
+    return config;
+});
+  
+
+
 interface VacationsState {
     vacations: VacationsDetails[]
+    userToursFollowings: FollowDetails[]
 }
 
 
@@ -23,14 +42,16 @@ export default class Vacations extends Component <any, VacationsState>{
     constructor(props: any) {
         super(props);
         this.state = {
-            vacations:[]
+            vacations:[],
+            userToursFollowings:[]
         };
 
         this.unsubscribeStore = store.subscribe(
             // In fact, the following function is our "listener", "refresh function"
             () => this.setState(
             {
-                vacations: store.getState().vacations
+                vacations: store.getState().vacations,
+                userToursFollowings: store.getState().userToursFollowings
             })
         );
     }
@@ -41,14 +62,26 @@ export default class Vacations extends Component <any, VacationsState>{
     
     public async componentDidMount() {
         this.getVacations();
+        this.getFollowers();
     }
+
 
     getVacations = async () => {
         const response = await axios.get<VacationsDetails[]>("http://localhost:3001/tours/");
         store.dispatch({ type: ActionType.GetAllVacations, payload: response.data});
         // this.setState({ vacations: response.data });
         // console.log(this.state.vacations);
+        // console.log(response.data);
     }
+
+    getFollowers = async () => {
+        const response = await axios.get<FollowDetails[]>("http://localhost:3001/follow/userFollowings");
+        store.dispatch({ type: ActionType.GetUserFollowings, payload: response.data});
+        // this.setState({ vacations: response.data });
+        // console.log(this.state.vacations);
+        // console.log(response.data);
+    }
+
 
 
     public render() {
@@ -75,15 +108,20 @@ export default class Vacations extends Component <any, VacationsState>{
                         />
 
                         <div className='userCardBodyStyle'>
-                            <p></p>
+                            {/* <p /> */}
+                            <br />
                             <p className="description">{vacation.description}</p>
-                            <p className="details">
-                                {`from: ${vacation.start_date.toString().slice(0, 10)} until: ${vacation.end_date.toString().slice(0, 10)}`}
-                                <br></br>
+                            <div className="detailsClass">
+                                {/* {`from: ${vacation.start_date.toString().slice(0, 10)} until: ${vacation.end_date.toString().slice(0, 10)}`} */}
+                                {/* <br></br> */}
+                                <div className="priceClass">
                                 {`price: ${vacation.price}`}
-                                <br></br>
-                                <b  className="followersClass">{`followers: ${vacation.followers}`}</b>
-                                </p>
+                                </div>
+                                {/* <br></br> */}
+                                <div className="followersClass">
+                                {`followers: ${vacation.followers}`}
+                                </div>
+                            </div>
                         </div>
                     </Card>
 

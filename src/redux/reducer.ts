@@ -14,6 +14,13 @@ export function reduce(oldAppState: AppState, action: Action): AppState {
         case ActionType.GetAllVacations:
             newAppState.vacations = action.payload;
             break;
+        case ActionType.GetUserFollowings:
+            newAppState.userToursFollowings = action.payload;
+            break;
+        case ActionType.getNumberOfFollowersForAllTours:
+            newAppState.toursFollowers = action.payload;
+            break;
+    
     }
 
     // After returning the new state, it's being published to all subscribers
