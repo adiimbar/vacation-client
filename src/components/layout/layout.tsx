@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
 // import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
@@ -10,40 +10,61 @@ import Login from '../login/login';
 import Footer from '../footer/footer';
 import Vacations from '../vacations/vacations';
 import Admin from '../admin/admin';
+import socketIOClient from 'socket.io-client';
 
 // need to remove this
 // import Register from '../register/register'
 
+export default function Layout() {
+    const [userId, setUserId] = useState(null);
 
-export default class Layout extends Component{
-    public render() {
-        return (
+    useEffect(() => {
+        const userId = sessionStorage.getItem('userId');
 
-            <BrowserRouter>
-                <section className="layout">
-                    <header>
-                        <Header />
-                    </header>
+        if (userId) setUserId(userId);
+    }, []);
 
-                    <main>
-                        <Switch>
-                            <Route path="/home" component={Login} exact />
-                            <Route path="/main" component={Vacations} exact />
-                            <Route path="/admin" component={Admin} exact />
-         
-                            {/* need to remove this */}
-                            {/* <Route path="/register" component={Register} exact /> */}
-         
-                            <Redirect from="/" to="/home" exact />
-                            {/* <Route component={PageNotFound} /> */}
-                        </Switch>
-                    </main>
+    useEffect(() => {
+        if (userId) {
+            console.log('connecting');
+            console.log('userId', userId);
+            const socket = socketIOClient('localhost:3001', {
+                query: `userId=${userId}`
+            });
 
-                    <footer>
-                        <Footer />
-                    </footer>
-                </section>
-            </BrowserRouter >
-        );
-    }
+            socket.on('new-tour-update', () => {
+               console.log('a new update!!! i am so happy');
+            });
+        }
+
+    }, [userId]);
+
+    return (
+
+        <BrowserRouter>
+            <section className="layout">
+                <header>
+                    <Header />
+                </header>
+
+                <main>
+                    <Switch>
+                        <Route path="/home" component={Login} exact />
+                        <Route path="/main" component={Vacations} exact />
+                        <Route path="/admin" component={Admin} exact />
+
+                        {/* need to remove this */}
+                        {/* <Route path="/register" component={Register} exact /> */}
+
+                        <Redirect from="/" to="/home" exact />
+                        {/* <Route component={PageNotFound} /> */}
+                    </Switch>
+                </main>
+
+                <footer>
+                    <Footer />
+                </footer>
+            </section>
+        </BrowserRouter >
+    );
 }

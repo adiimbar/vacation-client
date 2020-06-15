@@ -1,7 +1,7 @@
 import axios, {AxiosRequestConfig, AxiosResponse} from 'axios';
 
 class ApiService {
-    private rootUrl = 'http://10.0.0.18:3001';
+    private rootUrl = 'http://localhost:3001';
 
     async get<T = any, K = any>(partialUrl: string, config?: AxiosRequestConfig) {
         return await axios.get<T, K>(`${this.rootUrl}/${partialUrl}`, config);
