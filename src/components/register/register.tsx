@@ -5,6 +5,7 @@ import 'antd/dist/antd.css';
 import { Modal, Button, message } from 'antd';
 import RegistrationForm from '../forms/register-form/registerForm';
 import './register.css';
+import apiService from '../../services/api.service';
 
 interface RegisterState {
   visible: boolean,
@@ -71,7 +72,7 @@ export default class Register extends Component<any, RegisterState, UserRegistra
           registerObject.userName,
           registerObject.password);
           
-        const response = await axios.post<UserRegistrationDetails[]>("http://localhost:3001/users/register", userRegistrationDetails);
+        const response = await apiService.post<UserRegistrationDetails[]>("users/register", userRegistrationDetails);
         const serverResponse = response.data;
         const statusResponse = response.status;
         console.log(serverResponse);

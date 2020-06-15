@@ -5,11 +5,12 @@ import { VacationsDetails } from '../../models/VacationsDetails';
 import { Unsubscribe } from "redux";
 import { store } from '../../redux/store';
 import { ActionType } from '../../redux/action-type';
+import apiService from '../../services/api.service';
 
 import { Card, Button } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 
-// import VacationsCards from '../vacationsFunction/vacations';
+import VacationsCards from '../vacationsFunction/vacations';
 
 import Charts from '../charts/charts';
 
@@ -48,7 +49,7 @@ export default class Admin extends Component <any, VacationsState>{
     }
 
     getVacations = async () => {
-        const response = await axios.get<VacationsDetails[]>("http://localhost:3001/tours/");
+        const response = await apiService.get<VacationsDetails[]>("tours");
         store.dispatch({ type: ActionType.GetAllVacations, payload: response.data});
         // this.setState({ vacations: response.data });
         // console.log(this.state.vacations);
@@ -63,7 +64,7 @@ export default class Admin extends Component <any, VacationsState>{
                 {/* <Charts /> */}
 
 
-
+                <VacationsCards />
                 {this.state.vacations.map((vacation) => 
 
 

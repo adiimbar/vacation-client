@@ -7,6 +7,7 @@ import { ActionType } from '../../redux/action-type';
 
 import { Card } from 'antd';
 import { EditOutlined, EllipsisOutlined, CheckOutlined } from '@ant-design/icons';
+import apiService from '../../services/api.service';
 
 interface VacationsState {
     vacations: VacationsDetails[]
@@ -15,37 +16,36 @@ interface VacationsState {
 const { Meta } = Card;
 
 function VacationsCards()  {
-    const [vacations, setVications] = useState<VacationsDetails[]>()
-    // const [vacations, setVications] = useState([])
+    const vacations = store.getState().vacations;
 
     let unsubscribeStore: Unsubscribe;
 
     unsubscribeStore = store.subscribe(
         // In fact, the following function is our "listener", "refresh function"
-        () => setVications(
-                store.getState().vacations
-
-            // {
-            //     vacations: store.getState().vacations
-            //     store.getState().vacations
-            // }
-            )
+        () => {
+            const vactions = store.getState().vacations;
+            // console.log('vactions', vactions);
+            // setVications(vactions)
+        }
     );
     
     useEffect( () => {
         getVacations();
         // unsubscribeStore();
-        console.log(vacations);
+        // console.log(vacations);
 
         return unsubscribeStore()
-    }, [vacations, unsubscribeStore])
+    }, []);
 
 
     async function getVacations() {
-        const response = await axios.get<VacationsDetails[]>("http://localhost:3001/tours/");
+        const response = await apiService.get<VacationsDetails[]>("tours");
         // setVications(response.data);
         store.dispatch({ type: ActionType.GetAllVacations, payload: response.data});
     }
+
+
+    if (!(vacations && vacations.length)) return <> </>;
 
     return (
         <div className='cardsContainer'>

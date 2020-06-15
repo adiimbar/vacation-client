@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from "axios";
+
 import { AxiosResponse } from 'axios'
 import { UserLoginDetails } from '../../models/UserLoginDetails';
 import { SuccessfulLoginServerResponse } from '../../models/SuccessfulLoginServerResponse';
@@ -9,7 +9,7 @@ import 'antd/dist/antd.css';
 import Register from '../register/register';
 import LoginForm from '../forms/login-form/loginForm';
 import './login.css';
-
+import apiService from '../../services/api.service';
 
 export default class Login extends Component<any, UserLoginDetails, SuccessfulLoginServerResponse>{
 
@@ -27,7 +27,8 @@ export default class Login extends Component<any, UserLoginDetails, SuccessfulLo
 
         try {
             let userLoginDetails = new UserLoginDetails(loginObject.userName, loginObject.password);
-            const response = await axios.post<UserLoginDetails[], AxiosResponse<SuccessfulLoginServerResponse>>("http://localhost:3001/users/login", userLoginDetails);
+            const response = await apiService.post<UserLoginDetails[], AxiosResponse<SuccessfulLoginServerResponse>>("users/login", userLoginDetails);
+
             const serverResponse = response.data;
             console.log(serverResponse);
             sessionStorage.setItem("token", "Bearer " + serverResponse.token + "");

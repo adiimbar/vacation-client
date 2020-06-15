@@ -5,6 +5,7 @@ import { ToursFollowersDetails } from '../../models/toursFollowersDetails';
 import { Unsubscribe } from "redux";
 import { store } from '../../redux/store';
 import { ActionType } from '../../redux/action-type';
+import apiService from '../../services/api.service';
 
 
 interface ToursFollowersState {
@@ -38,7 +39,7 @@ export default class Charts extends Component <any, ToursFollowersState>{
     }
 
     getNumberOfFollowersForAllTours = async () => {
-        const response = await axios.get<ToursFollowersDetails[]>("http://localhost:3001/follow/");
+        const response = await apiService.get<ToursFollowersDetails[]>("follow");
         store.dispatch({ type: ActionType.getNumberOfFollowersForAllTours, payload: response.data});
         // this.setState({ vacations: response.data });
         // console.log(this.state.vacations);

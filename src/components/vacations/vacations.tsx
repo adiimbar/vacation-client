@@ -8,6 +8,7 @@ import { store } from '../../redux/store';
 import { ActionType } from '../../redux/action-type';
 
 import { Card, Button } from 'antd';
+import apiService from '../../services/api.service';
 
 
 const { Meta } = Card;
@@ -67,7 +68,7 @@ export default class Vacations extends Component <any, VacationsState>{
 
 
     getVacations = async () => {
-        const response = await axios.get<VacationsDetails[]>("http://localhost:3001/tours/");
+        const response = await apiService.get<VacationsDetails[]>("tours/");
         store.dispatch({ type: ActionType.GetAllVacations, payload: response.data});
         // this.setState({ vacations: response.data });
         // console.log(this.state.vacations);
@@ -75,7 +76,7 @@ export default class Vacations extends Component <any, VacationsState>{
     }
 
     getFollowers = async () => {
-        const response = await axios.get<FollowDetails[]>("http://localhost:3001/follow/userFollowings");
+        const response = await apiService.get<FollowDetails[]>("follow/userFollowings");
         store.dispatch({ type: ActionType.GetUserFollowings, payload: response.data});
         // this.setState({ vacations: response.data });
         // console.log(this.state.vacations);
