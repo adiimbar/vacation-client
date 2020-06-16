@@ -1,23 +1,16 @@
 import React, { Component } from 'react'
 import axios from "axios";
 import './vacations.css';
+import VacationsCards from '../vacationsFunction/vacations';
 import { VacationsDetails } from '../../models/VacationsDetails';
 import { FollowDetails } from '../../models/FollowDetails';
 import { Unsubscribe } from "redux";
 import { store } from '../../redux/store';
 import { ActionType } from '../../redux/action-type';
 
-import { Card, Button } from 'antd';
+// import { Card, Button } from 'antd';
 import apiService from '../../services/api.service';
 
-
-const { Meta } = Card;
-
-// axios.defaults.baseURL = 'http://localhost:3001/';
-// let token = sessionStorage.getItem('token');
-// console.log('logging token');
-// console.log(token);
-// axios.defaults.headers.commom = {'Authorization': `Bearer ${token}`};
 
 // Add a request interceptor
 axios.interceptors.request.use(function (config) {
@@ -61,72 +54,32 @@ export default class Vacations extends Component <any, VacationsState>{
         this.unsubscribeStore();
     }
     
-    public async componentDidMount() {
-        this.getVacations();
-        this.getFollowers();
+    componentDidMount() {
     }
 
 
-    getVacations = async () => {
-        const response = await apiService.get<VacationsDetails[]>("tours/");
-        store.dispatch({ type: ActionType.GetAllVacations, payload: response.data});
-        // this.setState({ vacations: response.data });
-        // console.log(this.state.vacations);
-        // console.log(response.data);
-    }
+    // getVacations = async () => {
+    //     const response = await apiService.get<VacationsDetails[]>("tours/");
+    //     store.dispatch({ type: ActionType.GetAllVacations, payload: response.data});
+    //     // this.setState({ vacations: response.data });
+    //     // console.log(this.state.vacations);
+    //     // console.log(response.data);
+    // }
 
-    getFollowers = async () => {
-        const response = await apiService.get<FollowDetails[]>("follow/userFollowings");
-        store.dispatch({ type: ActionType.GetUserFollowings, payload: response.data});
-        // this.setState({ vacations: response.data });
-        // console.log(this.state.vacations);
-        // console.log(response.data);
-    }
+    // getFollowers = async () => {
+    //     const response = await apiService.get<FollowDetails[]>("follow/userFollowings");
+    //     store.dispatch({ type: ActionType.GetUserFollowings, payload: response.data});
+    //     // this.setState({ vacations: response.data });
+    //     // console.log(this.state.vacations);
+    //     // console.log(response.data);
+    // }
 
 
 
     public render() {
         return (
             <div className='cardsContainer'>
-                
-                {this.state.vacations.map((vacation) => 
-
-
-                    <Card
-                        className='cardDiv'
-                        key={vacation.id}
-                        style={{ width: 300 }}
-                        cover={
-                        <img
-                            alt="Oops I'm missing"
-                            src={vacation.image_path}
-                        />
-                        }
-                    >
-                        <Meta
-                        avatar={<Button type="primary" shape="round">follow</Button>}
-                        title={vacation.destination}
-                        />
-
-                        <div className='CardBodyClass'>
-                            {/* <p /> */}
-                            <br />
-                            <p className="description">{vacation.description}</p>
-                            <div className="detailsClass">
-                                {/* {`from: ${vacation.start_date.toString().slice(0, 10)} until: ${vacation.end_date.toString().slice(0, 10)}`} */}
-                                {/* <br></br> */}
-                                <div className="priceClass">
-                                {`price: ${vacation.price}`}
-                                </div>
-                                {/* <br></br> */}
-                                <div className="followersClass">
-                                {`followers: ${vacation.followers}`}
-                                </div>
-                            </div>
-                        </div>
-                    </Card>
-
-                )}
+                <VacationsCards />               
             </div>
         );
     }

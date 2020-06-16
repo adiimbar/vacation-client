@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import axios from "axios";
+// import axios from "axios";
 import { VacationsDetails } from '../../models/VacationsDetails';
+import { FollowDetails } from '../../models/FollowDetails';
 import { Unsubscribe } from "redux";
 import { store } from '../../redux/store';
 import { ActionType } from '../../redux/action-type';
 
 import { Card, Button } from 'antd';
-import { EditOutlined, EllipsisOutlined, CheckOutlined } from '@ant-design/icons';
+import { EditOutlined } from '@ant-design/icons';
 import apiService from '../../services/api.service';
 
 import './vacations.css';
@@ -21,9 +22,8 @@ function VacationsCards()  {
     const vacations = store.getState().vacations;
     
     // Mock need to be removed
-    // const userType = 'ADMIN';
     // const [userType, setUserType] = useState('CUSTOMER');
-    const [userType, setUserType] = useState('ADMIN');
+    const [userType, setUserType] = useState('CUSTOMER');
 
 
     let unsubscribeStore: Unsubscribe;
@@ -31,42 +31,53 @@ function VacationsCards()  {
     unsubscribeStore = store.subscribe(
         // In fact, the following function is our "listener", "refresh function"
         () => {
-            const vacations = store.getState().vacations;
+            // const vacations = store.getState().vacations;
         }
     );
     
     useEffect( () => {
         getVacations();
+        // getFollowers()
         // unsubscribeStore();
 
         return unsubscribeStore()
-    }, [unsubscribeStore]);
+    }, []);
 
 
     async function getVacations() {
         const response = await apiService.get<VacationsDetails[]>("tours");
         // setVications(response.data);
         store.dispatch({ type: ActionType.GetAllVacations, payload: response.data});
+        console.log('get vacations was called');
     }
 
+    // async function getFollowers() {
+    //     const response = await apiService.get<FollowDetails[]>("follow/userFollowings");
+    //     store.dispatch({ type: ActionType.GetUserFollowings, payload: response.data});
+    //     // this.setState({ vacations: response.data });
+    //     // console.log(this.state.vacations);
+    //     // console.log(response.data);
+    // }
 
+
+    // declaring element that will be assigned a button and rendered accordion to userType
+    // the button will be assigned to each card in the Meta section
     let metaDiv: any
+    // follow button for user
     if (userType === 'CUSTOMER') {
         metaDiv = <React.Fragment>
-                        {<Button type="primary" shape="round">follow</Button>}
+                        {<Button type="primary" shape="round">
+                            follow
+                        </Button>}
                     </React.Fragment>
 
+    // edit button for admin
     } else if (userType === 'ADMIN') {
-        metaDiv = <React.Fragment />
-    }
-
-    let editButtonDiv: any
-    if (userType === 'CUSTOMER') {
-        editButtonDiv = <React.Fragment />
-    } else if (userType === 'ADMIN') {
-        editButtonDiv = <Button type="primary" shape="circle">
+        metaDiv = <React.Fragment>
+                        {<Button type="primary" shape="circle">
                             <EditOutlined />
-                        </Button>
+                        </Button>}
+                    </React.Fragment>
     }
 
     if (!(vacations && vacations.length)) return <> </>;
@@ -111,9 +122,6 @@ function VacationsCards()  {
                     <div className="datesClass">
                         {`starts: ${vacation.start_date.toString().slice(0, 10)} ends: ${vacation.end_date.toString().slice(0, 10)}`}
                     </div>
-                </div>
-                <div className="editButtonClass">
-                    {editButtonDiv}
                 </div>
             </Card>
 
