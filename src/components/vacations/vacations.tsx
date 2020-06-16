@@ -108,7 +108,7 @@ export default class Vacations extends Component <any, VacationsState>{
                         title={vacation.destination}
                         />
 
-                        <div className='userCardBodyStyle'>
+                        <div className='CardBodyClass'>
                             {/* <p /> */}
                             <br />
                             <p className="description">{vacation.description}</p>

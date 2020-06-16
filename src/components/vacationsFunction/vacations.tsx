@@ -5,37 +5,42 @@ import { Unsubscribe } from "redux";
 import { store } from '../../redux/store';
 import { ActionType } from '../../redux/action-type';
 
-import { Card } from 'antd';
+import { Card, Button } from 'antd';
 import { EditOutlined, EllipsisOutlined, CheckOutlined } from '@ant-design/icons';
 import apiService from '../../services/api.service';
 
-interface VacationsState {
-    vacations: VacationsDetails[]
-}
+import './vacations.css';
+
+// interface VacationsState {
+//     vacations: VacationsDetails[]
+// }
 
 const { Meta } = Card;
 
 function VacationsCards()  {
     const vacations = store.getState().vacations;
+    
+    // Mock need to be removed
+    // const userType = 'ADMIN';
+    // const [userType, setUserType] = useState('CUSTOMER');
+    const [userType, setUserType] = useState('ADMIN');
+
 
     let unsubscribeStore: Unsubscribe;
 
     unsubscribeStore = store.subscribe(
         // In fact, the following function is our "listener", "refresh function"
         () => {
-            const vactions = store.getState().vacations;
-            // console.log('vactions', vactions);
-            // setVications(vactions)
+            const vacations = store.getState().vacations;
         }
     );
     
     useEffect( () => {
         getVacations();
         // unsubscribeStore();
-        // console.log(vacations);
 
         return unsubscribeStore()
-    }, []);
+    }, [unsubscribeStore]);
 
 
     async function getVacations() {
@@ -45,13 +50,30 @@ function VacationsCards()  {
     }
 
 
+    let metaDiv: any
+    if (userType === 'CUSTOMER') {
+        metaDiv = <React.Fragment>
+                        {<Button type="primary" shape="round">follow</Button>}
+                    </React.Fragment>
+
+    } else if (userType === 'ADMIN') {
+        metaDiv = <React.Fragment />
+    }
+
+    let editButtonDiv: any
+    if (userType === 'CUSTOMER') {
+        editButtonDiv = <React.Fragment />
+    } else if (userType === 'ADMIN') {
+        editButtonDiv = <Button type="primary" shape="circle">
+                            <EditOutlined />
+                        </Button>
+    }
+
     if (!(vacations && vacations.length)) return <> </>;
 
     return (
         <div className='cardsContainer'>
                 
-        <p>cards div</p>
-
         {vacations.map((vacation) => 
 
 
@@ -65,21 +87,33 @@ function VacationsCards()  {
                     src={vacation.image_path}
                 />
                 }
-                actions={[
-                <CheckOutlined key="follow" />,
-                <EditOutlined key="edit" />,
-                <EllipsisOutlined key="ellipsis" />,
-                ]}
+                // actions={[
+                // <EditOutlined key="edit" />,
+                // ]}
             >
                 <Meta
                 title={vacation.destination}
-                description={`from: ${vacation.start_date.toString().slice(0, 10)} until: ${vacation.end_date.toString().slice(0, 10)}`}
+                avatar={metaDiv}
                 />
 
-                <div>
-                    <p></p>
+                <div className='CardBodyClass'>
+                    <br />
                     <p className="description">{vacation.description}</p>
-                    <p className="price">{`price: ${vacation.price}`}</p>
+                    <div className="detailsClass">
+                        <div className="priceClass">
+                            {`price: ${vacation.price}`}
+                        </div>
+                        <div className="followersClass">
+                            {`followers: ${vacation.followers}`}
+                        </div>
+                    </div>
+                    <br />
+                    <div className="datesClass">
+                        {`starts: ${vacation.start_date.toString().slice(0, 10)} ends: ${vacation.end_date.toString().slice(0, 10)}`}
+                    </div>
+                </div>
+                <div className="editButtonClass">
+                    {editButtonDiv}
                 </div>
             </Card>
 
