@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect, useRef} from 'react';
 // import { Formik, Form, Field, ErrorMessage } from 'formik';
 // import * as Yup from 'yup';
 //   import TextError from './TextError';
 // import { OmitProps } from 'antd/lib/transfer/ListBody';
 
-
 import { Form, Input, Button } from 'antd';
+
 
 const layout = {
     wrapperCol: { span: 8 },
@@ -19,6 +19,12 @@ const LoginForm = (props: any) => {
         console.log('Success:', values);
         props.loginHandler(values)
     };
+
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+        inputRef.current.focus();
+    }, [])
 
     // const onFinishFailed = (errorInfo: any) => {
     //     console.log('Failed:', errorInfo);
@@ -35,7 +41,7 @@ const LoginForm = (props: any) => {
                 name="userName"
                 rules={[{ required: true, message: 'Please enter username' }]}
             >
-                <Input placeholder="Username" />
+                <Input ref={inputRef} type="text" placeholder="Username" />
             </Form.Item>
 
             <Form.Item

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from "axios";
+// import axios from "axios";
 import { UserRegistrationDetails } from '../../models/UserRegistrationDetails';
 import 'antd/dist/antd.css';
 import { Modal, Button, message } from 'antd';

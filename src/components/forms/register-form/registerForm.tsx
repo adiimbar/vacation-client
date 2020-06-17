@@ -2,29 +2,29 @@ import React, { useEffect } from 'react';
 import { Form, Input, Button } from 'antd';
 
 
-const formItemLayout = {
-    labelCol: {
-        xs: { span: 24 },
-        sm: { span: 8 },
-    },
-    wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 },
-    },
-};
+// const formItemLayout = {
+//     labelCol: {
+//         xs: { span: 24 },
+//         sm: { span: 8 },
+//     },
+//     wrapperCol: {
+//         xs: { span: 24 },
+//         sm: { span: 16 },
+//     },
+// };
 
-const tailFormItemLayout = {
-    wrapperCol: {
-        xs: {
-            span: 24,
-            offset: 0,
-        },
-        sm: {
-            span: 16,
-            offset: 8,
-        },
-    },
-};
+// const tailFormItemLayout = {
+//     wrapperCol: {
+//         xs: {
+//             span: 24,
+//             offset: 0,
+//         },
+//         sm: {
+//             span: 16,
+//             offset: 8,
+//         },
+//     },
+// };
 
 
 
@@ -44,7 +44,7 @@ const RegistrationForm = (props: any) => {
 
     return (
         <Form
-            {...formItemLayout}
+            // {...formItemLayout}
             // form={form}
             name="register"
             onFinish={onFinish}
@@ -113,7 +113,7 @@ const RegistrationForm = (props: any) => {
                 <Input.Password placeholder="Confirm password" />
             </Form.Item>
 
-            <Form.Item {...tailFormItemLayout}>
+            <Form.Item >
                 <Button type="primary" htmlType="submit">
                     Register
           </Button>

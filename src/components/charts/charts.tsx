@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from "axios";
+// import axios from "axios";
 import { ToursFollowersDetails } from '../../models/toursFollowersDetails';
 // import { ToursFollowersDetails } from '../../models/ToursFollowersDetails';
 import { Unsubscribe } from "redux";

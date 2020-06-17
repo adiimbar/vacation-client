@@ -6,10 +6,8 @@ import { VacationsDetails } from '../../models/VacationsDetails';
 import { FollowDetails } from '../../models/FollowDetails';
 import { Unsubscribe } from "redux";
 import { store } from '../../redux/store';
-import { ActionType } from '../../redux/action-type';
-
-// import { Card, Button } from 'antd';
-import apiService from '../../services/api.service';
+// import { ActionType } from '../../redux/action-type';
+// import apiService from '../../services/api.service';
 
 
 // Add a request interceptor

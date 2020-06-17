@@ -5,7 +5,6 @@ import { UserLoginDetails } from '../../models/UserLoginDetails';
 import { SuccessfulLoginServerResponse } from '../../models/SuccessfulLoginServerResponse';
 import 'antd/dist/antd.css';
 // import { Button } from 'antd';
-// import { useFormik } from 'formik';
 import Register from '../register/register';
 import LoginForm from '../forms/login-form/loginForm';
 import './login.css';
@@ -47,6 +46,7 @@ export default class Login extends Component<any, UserLoginDetails, SuccessfulLo
 
         }
         catch (err) {
+            // change to antd message
             alert(err.message);
             console.log(err);
         }
