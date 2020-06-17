@@ -15,11 +15,40 @@ export function reduce(oldAppState: AppState, action: Action): AppState {
             newAppState.vacations = action.payload;
             break;
         case ActionType.GetUserFollowings:
-            newAppState.userToursFollowings = action.payload;
+            let userToursFollowings: {[k: string]: boolean} = {};
+            action.payload.forEach((element: any) => {
+                let key: string = element.tour_id.toString();
+                userToursFollowings[key] = true;
+            });
+            newAppState.userToursFollowings = userToursFollowings;
+            console.log(userToursFollowings)
+            // newAppState.userToursFollowings = action.payload;
             break;
         case ActionType.getNumberOfFollowersForAllTours:
             newAppState.toursFollowers = action.payload;
             break;
+        case ActionType.AddUserFollow:
+
+            let addObj = action.payload;
+            let keyToAdd: string = addObj.tourId.toString();
+            newAppState.userToursFollowings[keyToAdd] = true;
+            // console.log('in reducer AddUserFollow')
+            // console.log(newAppState.userToursFollowings);
+            // console.log(userToursFollowings)
+
+            // newAppState.userToursFollowings = action.payload;
+            // newAppState.isFollowing = action.payload;
+            break;
+        case ActionType.RemoveUserFollow:
+            // let removeObj = action.payload;
+            // let keyToRemove: string = removeObj.tour_id.toString();
+            // console.log(newAppState.userToursFollowings);
+            // delete newAppState.userToursFollowings;
+
+            // newAppState.userToursFollowings = action.payload;
+            // newAppState.isFollowing = action.payload;
+            break;
+            
     
     }
 
