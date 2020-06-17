@@ -19,7 +19,9 @@ import './vacations.css';
 const { Meta } = Card;
 
 function VacationsCards()  {
-    const vacations = store.getState().vacations;
+    // let vacations: VacationsDetails[] = [];
+    let vacations = store.getState().vacations;
+    // const [vacations, setVacations] = useState([]);
 
     // let followedTours = store.getState().userToursFollowings;
     // const [followedTours, updateFollowedTours] = useState();
@@ -35,23 +37,26 @@ function VacationsCards()  {
     unsubscribeStore = store.subscribe(
         // In fact, the following function is our "listener", "refresh function"
         () => {
-            // const vacations = store.getState().vacations;
+            // vacations = store.getState().vacations;
             // followedTours = store.getState().userToursFollowings;
         }
     );
     
     useEffect( () => {
-        getVacations();
+        // getVacations();
         // getFollowers()
-        // unsubscribeStore();
+        unsubscribeStore();
+
+        console.log('1234567890987654321');
 
         return unsubscribeStore()
-    }, []);
+    }, [unsubscribeStore]);
 
     useEffect( () => {
-        getFollowers()
-
+        getVacations();
+        getFollowers();
         // followedTours = store.getState().userToursFollowings;
+        
     }, []);
 
     async function getVacations() {
@@ -147,9 +152,6 @@ function VacationsCards()  {
                     src={vacation.image_path}
                 />
                 }
-                // actions={[
-                // <EditOutlined key="edit" />,
-                // ]}
             >
                 <Meta
                 title={vacation.destination}
