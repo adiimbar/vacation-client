@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Form, Input, Button } from 'antd';
+import './registerForm.css';
 
 
 // const formItemLayout = {
@@ -43,6 +44,7 @@ const RegistrationForm = (props: any) => {
     };
 
     return (
+        <div className='registrationClass'>
         <Form
             // {...formItemLayout}
             // form={form}
@@ -119,6 +121,7 @@ const RegistrationForm = (props: any) => {
           </Button>
             </Form.Item>
         </Form>
+        </div>
     );
 };
 

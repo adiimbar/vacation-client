@@ -64,7 +64,7 @@ export default class Login extends Component<any, UserLoginDetails, SuccessfulLo
     public render() {
 
         return (
-            <div className='login'>
+            <div className='loginContainer'>
                 <LoginForm loginHandler={this.login} />
                 <Register />
             </div>

@@ -1,14 +1,10 @@
 import React, { useEffect, useRef} from 'react';
-// import { Formik, Form, Field, ErrorMessage } from 'formik';
-// import * as Yup from 'yup';
-//   import TextError from './TextError';
-// import { OmitProps } from 'antd/lib/transfer/ListBody';
-
 import { Form, Input, Button } from 'antd';
+import Register from '../../register/register';
 
 
 const layout = {
-    wrapperCol: { span: 8 },
+    wrapperCol: { offset: 7, span: 10 },
 };
 const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
@@ -54,6 +50,7 @@ const LoginForm = (props: any) => {
 
             <Form.Item {...tailLayout}>
                 <Button type="primary" htmlType="submit">login</Button>
+                <Register />
             </Form.Item>
         </Form>
 
