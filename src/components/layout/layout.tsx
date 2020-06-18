@@ -12,6 +12,8 @@ import Vacations from '../vacations/vacations';
 import Admin from '../admin/admin';
 import Charts from '../charts/charts';
 import socketIOClient from 'socket.io-client';
+import { store } from '../../redux/store';
+
 
 // need to remove this
 // import Register from '../register/register'
@@ -20,7 +22,8 @@ export default function Layout() {
     const [userId, setUserId] = useState(null);
 
     useEffect(() => {
-        const userId = sessionStorage.getItem('userId');
+        // const userId = sessionStorage.getItem('userId');
+        const userId = store.getState().vacations;
 
         if (userId) setUserId(userId);
     }, []);

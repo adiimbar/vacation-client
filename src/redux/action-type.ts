@@ -4,5 +4,6 @@ export enum ActionType {
     getNumberOfFollowersForAllTours,
     AddUserFollow,
     RemoveUserFollow,
+    SetUserType,
     Login    
 }

@@ -11,9 +11,11 @@ export function reduce(oldAppState: AppState, action: Action): AppState {
         case ActionType.Login:
             newAppState.isLoggedIn = true;
             break;
+
         case ActionType.GetAllVacations:
             newAppState.vacations = action.payload;
             break;
+
         case ActionType.GetUserFollowings:
             let userToursFollowings: {[k: string]: boolean} = {};
             action.payload.forEach((element: any) => {
@@ -24,11 +26,12 @@ export function reduce(oldAppState: AppState, action: Action): AppState {
             console.log(userToursFollowings)
             // newAppState.userToursFollowings = action.payload;
             break;
+
         case ActionType.getNumberOfFollowersForAllTours:
             newAppState.toursFollowers = action.payload;
             break;
-        case ActionType.AddUserFollow:
 
+        case ActionType.AddUserFollow:
             let addObj = action.payload;
             let keyToAdd: string = addObj.tourId.toString();
             newAppState.userToursFollowings[keyToAdd] = true;
@@ -39,6 +42,7 @@ export function reduce(oldAppState: AppState, action: Action): AppState {
             // newAppState.userToursFollowings = action.payload;
             // newAppState.isFollowing = action.payload;
             break;
+
         case ActionType.RemoveUserFollow:
             // let removeObj = action.payload;
             // let keyToRemove: string = removeObj.tour_id.toString();
@@ -47,6 +51,10 @@ export function reduce(oldAppState: AppState, action: Action): AppState {
 
             // newAppState.userToursFollowings = action.payload;
             // newAppState.isFollowing = action.payload;
+        break;
+
+        case ActionType.SetUserType:
+            newAppState.userType = action.payload;
             break;
             
     

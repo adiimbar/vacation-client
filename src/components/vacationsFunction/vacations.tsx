@@ -29,7 +29,8 @@ function VacationsCards()  {
     
     // Mock need to be removed
     // const [userType, setUserType] = useState('CUSTOMER');
-    const [userType, setUserType] = useState('ADMIN');
+    // const [userType, setUserType] = useState('ADMIN');
+    const userType = store.getState().userType;
 
 
     let unsubscribeStore: Unsubscribe;
