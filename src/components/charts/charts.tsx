@@ -55,6 +55,8 @@ export default class Charts extends Component <any, ToursFollowersState>{
         }
         console.log(prevProps);
         console.log(prevState);
+        let asdf = store.getState().userType;
+        console.log(asdf);
 
       }
 

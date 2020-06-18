@@ -40,15 +40,12 @@ function VacationsCards()  {
         () => {
             // vacations = store.getState().vacations;
             // followedTours = store.getState().userToursFollowings;
+            // setUserType(store.getState().userType)
         }
     );
     
     useEffect( () => {
-        // getVacations();
-        // getFollowers()
         unsubscribeStore();
-
-        console.log('1234567890987654321');
 
         return unsubscribeStore()
     }, [unsubscribeStore]);
@@ -70,25 +67,16 @@ function VacationsCards()  {
     async function getFollowers() {
         const response = await apiService.get<FollowDetails[]>("follow/userFollowings");
         store.dispatch({ type: ActionType.GetUserFollowings, payload: response.data});
-        // this.setState({ vacations: response.data });
-        // console.log(this.state.vacations);
-        // console.log(response.data);
     }
 
     async function follow(vacationObj: any) {
         const response = await apiService.post<FollowDetails[]>("follow/addFollower", vacationObj);
         store.dispatch({ type: ActionType.AddUserFollow, payload: response.data});
-        // this.setState({ vacations: response.data });
-        // console.log(this.state.vacations);
-        // console.log(response.data);
     }
 
     async function unfollow(vacationId: any) {
         const response = await apiService.delete<FollowDetails[]>(`follow/${vacationId}`);
         store.dispatch({ type: ActionType.RemoveUserFollow, payload: response.data});
-        // this.setState({ vacations: response.data });
-        // console.log(this.state.vacations);
-        // console.log(response.data);
     }
 
     function followClickHandler(vacationId: any) {
@@ -115,6 +103,7 @@ function VacationsCards()  {
     // the button will be assigned to each card in the Meta section
     let metaButtonDiv: any
     // follow button for user
+
     if (userType === 'CUSTOMER') {
 
         metaButtonDiv = 'follow';
@@ -134,6 +123,7 @@ function VacationsCards()  {
         //             </React.Fragment>
     }
 
+    
     if (!(vacations && vacations.length)) return <> </>;
 
     return (

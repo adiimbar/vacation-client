@@ -10,14 +10,14 @@ import { store } from '../../redux/store';
 // import apiService from '../../services/api.service';
 
 
-// Add a request interceptor
-axios.interceptors.request.use(function (config) {
-    let token = sessionStorage.getItem('token');
-    // const token = store.getState().session.token;
-    config.headers.Authorization = token;
+// // Add a request interceptor
+// axios.interceptors.request.use(function (config) {
+//     let token = sessionStorage.getItem('token');
+//     // const token = store.getState().session.token;
+//     config.headers.Authorization = token;
 
-    return config;
-});
+//     return config;
+// });
   
 
 

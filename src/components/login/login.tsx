@@ -33,24 +33,21 @@ export default class Login extends Component<any, UserLoginDetails, SuccessfulLo
             let userLoginDetails = new UserLoginDetails(loginObject.userName, loginObject.password);
             const response = await apiService.post<UserLoginDetails[], AxiosResponse<SuccessfulLoginServerResponse>>("users/login", userLoginDetails);
 
+            // need to change dispatch to save the login response
             store.dispatch({ type: ActionType.SetUserType, payload: response.data.userType});
+            // store.dispatch({ type: ActionType.SetUserDetails, payload: response.data});
 
             const serverResponse = response.data;
             console.log(serverResponse);
             // need to save the token in the store
             sessionStorage.setItem("token", "Bearer " + serverResponse.token + "");
-            // sessionStorage.setItem("userId", serverResponse.userId);
-            // const userType = serverResponse.userType;
-            // console.log(userType);
+            sessionStorage.setItem("userId", serverResponse.userId);
 
             if (serverResponse.userType === "ADMIN") {
-                // store.dispatch({ type: ActionType.SetUserType, payload: response.data.userType});
                 this.props.history.push('/admin');
-                // sessionStorage.setItem("userType", "ADMIN");
             }
             else if (serverResponse.userType === "CUSTOMER") {
                 this.props.history.push('/main');
-                // sessionStorage.setItem("userType", "CUSTOMER");
             }
 
         }
