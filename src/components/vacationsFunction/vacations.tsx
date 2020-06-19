@@ -60,9 +60,7 @@ function VacationsCards()  {
 
     async function getVacations() {
         const response = await apiService.get<VacationsDetails[]>("tours");
-        // setVications(response.data);
         store.dispatch({ type: ActionType.GetAllVacations, payload: response.data});
-        // console.log('get vacations was called');
     }
 
     async function getFollowers() {
@@ -73,15 +71,25 @@ function VacationsCards()  {
     async function follow(vacationObj: any) {
         const response = await apiService.post<FollowDetails[]>("follow/addFollower", vacationObj);
         store.dispatch({ type: ActionType.AddUserFollow, payload: response.data});
-        console.log('follow response');
-        console.log(response.data);
-        console.log(store.getState().vacations);
     }
 
     async function unfollow(vacationId: any) {
         const response = await apiService.delete<FollowDetails[]>(`follow/${vacationId}`);
         store.dispatch({ type: ActionType.RemoveUserFollow, payload: response.data});
-        console.log('Unfollow response');
+    }
+
+    async function addVacation(vacationObj: any) {
+        const response = await apiService.post<VacationsDetails[]>("tours", vacationObj);
+        // store.dispatch({ type: ActionType.AddVacation, payload: response.data});
+        console.log('add vacation response');
+        console.log(response.data);
+        console.log(store.getState().vacations);
+    }
+
+    async function updateVacation(vacationObj: any) {
+        const response = await apiService.put<VacationsDetails[]>("tours", vacationObj);
+        // store.dispatch({ type: ActionType.AddVacation, payload: response.data});
+        console.log('update vacation response');
         console.log(response.data);
         console.log(store.getState().vacations);
     }
@@ -112,7 +120,9 @@ function VacationsCards()  {
     
 
     function editHandler(vacationId: any) {
-        console.log('editHandler was clicked')
+        console.log('editHandler was clicked');
+
+        // need to call an editing form - the api Call can be in the form
     }
 
     function followClickHandler(vacationId: any, isFollowedStatus: boolean) {

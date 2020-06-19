@@ -10,6 +10,7 @@ import { store } from '../../redux/store';
 // import { Button } from 'antd';
 
 import VacationsCards from '../vacationsFunction/vacations';
+import VacationUpdate from '../vacationUpdate/vacationUpdate';
 
 // import Charts from '../charts/charts';
 
@@ -50,6 +51,7 @@ export default class Admin extends Component <any, VacationsState>{
     public render() {
         return (
             <div className='adminContainer'>
+                <VacationUpdate />
                 <VacationsCards />
             </div>
         );

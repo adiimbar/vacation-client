@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import { UserRegistrationDetails } from '../../models/UserRegistrationDetails';
 import 'antd/dist/antd.css';
 import { Modal, Button, message } from 'antd';
-import RegistrationForm from '../forms/register-form/registerForm';
-import './register.css';
+// import VacationUpdateForm from '../forms/vacation-update-form';
+import VacationUpdateForm from '../forms/vacation-update-form/vacationUpdateForm';
+import './vacationUpdate.css';
 import apiService from '../../services/api.service';
 
 interface RegisterState {
@@ -13,7 +14,7 @@ interface RegisterState {
 
 }
 
-export default class Register extends Component<any, RegisterState, UserRegistrationDetails> {
+export default class VacationUpdate extends Component<any, RegisterState, UserRegistrationDetails> {
 
   constructor(props: any) {
     super(props);
@@ -59,7 +60,7 @@ export default class Register extends Component<any, RegisterState, UserRegistra
   };
 
 
-  private register = async (registerObject: any) => {
+  private vacationUpdate = async (registerObject: any) => {
 
     console.log('inside register');
     console.log(registerObject);
@@ -92,7 +93,7 @@ export default class Register extends Component<any, RegisterState, UserRegistra
       // <div className="register">
       <React.Fragment>
         <Button onClick={this.showModal}>
-          register
+          Update vacation
         </Button>
 
         <Modal
@@ -111,7 +112,7 @@ export default class Register extends Component<any, RegisterState, UserRegistra
             // </Button>,
           // ]}
         >
-          <RegistrationForm registrationHandler={this.register} />
+          <VacationUpdateForm vacationUpdateHandler={this.vacationUpdate} />
         </Modal>
       </React.Fragment>
       // </div>
