@@ -18,6 +18,7 @@ import './vacations.css';
 
 const { Meta } = Card;
 
+
 function VacationsCards()  {
     // let vacations: VacationsDetails[] = [];
     let vacations = store.getState().vacations;
@@ -79,9 +80,21 @@ function VacationsCards()  {
         store.dispatch({ type: ActionType.RemoveUserFollow, payload: response.data});
     }
 
-    function followClickHandler(vacationId: any) {
+    function UserCardFollow(vacation: any) {
+        console.log(vacation);
+       return <Button type="primary" shape="round" onClick={() => followClickHandler(vacation.id)}>
+            follow
+        </Button>
+    }
 
-        console.log('userToursFollowings state')
+    function UserAdminEdit(vacation: any) {
+        return <Button type="primary" shape="circle" onClick={() => followClickHandler(vacation.id)}>
+            <EditOutlined />
+        </Button>
+    }
+    
+
+    function followClickHandler(vacationId: any) {
 
         if(true) {
             let vacationObj = {
@@ -93,36 +106,7 @@ function VacationsCards()  {
         } else if(false) {
             unfollow(vacationId)
         }
-
-        console.log(store.getState().userToursFollowings);
-
-    }   
-
-
-    // declaring element that will be assigned a button and rendered accordion to userType
-    // the button will be assigned to each card in the Meta section
-    let metaButtonDiv: any
-    // follow button for user
-
-    if (userType === 'CUSTOMER') {
-
-        metaButtonDiv = 'follow';
-        // metaButtonDiv = <React.Fragment>
-        //                 {<Button type="primary" shape="round" onClick={() => follow('HTMLElementObject.id')}>
-        //                     follow
-        //                 </Button>}
-        //             </React.Fragment>
-
-    // edit button for admin
-    } else if (userType === 'ADMIN') {
-        metaButtonDiv = <EditOutlined />
-        // metaButtonDiv = <React.Fragment>
-        //                 {<Button type="primary" shape="circle">
-        //                     <EditOutlined />
-        //                 </Button>}
-        //             </React.Fragment>
     }
-
     
     if (!(vacations && vacations.length)) return <> </>;
 
@@ -146,9 +130,11 @@ function VacationsCards()  {
             >
                 <Meta
                 title={vacation.destination}
-                avatar={<Button type="primary" shape="round" value={vacation.id.toString()} onClick={() => followClickHandler(vacation.id)}>
-                            {metaButtonDiv}
-                        </Button>}
+                avatar={
+                    userType === 'CUSTOMER' ? 
+                    <UserCardFollow {...vacation} /> : 
+                        <UserAdminEdit  {...vacation} />
+                        }
                 />
 
                 <div className='CardBodyClass'>

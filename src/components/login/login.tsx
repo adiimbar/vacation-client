@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { AxiosResponse } from 'axios'
+import jwtDecode from 'jwt-decode';
 import { UserLoginDetails } from '../../models/UserLoginDetails';
 import { SuccessfulLoginServerResponse } from '../../models/SuccessfulLoginServerResponse';
 // import { UserType } from '../../models/UserType';
@@ -39,6 +40,9 @@ export default class Login extends Component<any, UserLoginDetails, SuccessfulLo
 
             const serverResponse = response.data;
             console.log(serverResponse);
+            let tokenDecoded = jwtDecode(serverResponse.token);
+            console.log('jwt:');
+            console.log(tokenDecoded);
             // need to save the token in the store
             sessionStorage.setItem("token", "Bearer " + serverResponse.token + "");
             sessionStorage.setItem("userId", serverResponse.userId);
