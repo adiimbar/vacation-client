@@ -33,24 +33,46 @@ export function reduce(oldAppState: AppState, action: Action): AppState {
 
         case ActionType.AddUserFollow:
             let addObj = action.payload;
-            let keyToAdd: string = addObj.tourId.toString();
-            newAppState.userToursFollowings[keyToAdd] = true;
-            // console.log('in reducer AddUserFollow')
-            // console.log(newAppState.userToursFollowings);
-            // console.log(userToursFollowings)
+            let isFollowing: any = addObj.tourId;
+            let addFollowerVacationsArray = newAppState.vacations;
+            let addFollowerArrayCount: number = 0;
+            // console.log('in reducer');
+            // console.log(isFollowing);
+            // console.log(addFollowerVacationsArray);
 
-            // newAppState.userToursFollowings = action.payload;
-            // newAppState.isFollowing = action.payload;
+            for (let tourObj of addFollowerVacationsArray) {
+                // console.log(addFollowerArrayCount);
+                // console.log(tourObj);
+                if (tourObj.id === isFollowing) {
+                    addFollowerVacationsArray[addFollowerArrayCount].isFollowed = isFollowing;
+                    break;
+                }
+                addFollowerArrayCount = addFollowerArrayCount + 1;
+              }
+
             break;
 
         case ActionType.RemoveUserFollow:
-            // let removeObj = action.payload;
-            // let keyToRemove: string = removeObj.tour_id.toString();
-            // console.log(newAppState.userToursFollowings);
-            // delete newAppState.userToursFollowings;
+            let removeObj = action.payload;
+            // console.log('in reducer remove follower');
+            let tourIdToRemove: number = Number(removeObj.tourId);
 
-            // newAppState.userToursFollowings = action.payload;
-            // newAppState.isFollowing = action.payload;
+            let removeFollowerVacationsArray = newAppState.vacations;
+            let removeFollowerArrayCount: number = 0;
+            // console.log('in reducer');
+            // console.log(tourIdToRemove);
+            // console.log(removeFollowerVacationsArray);
+
+            for (let tourObj of removeFollowerVacationsArray) {
+                // console.log(removeFollowerArrayCount);
+                // console.log(tourObj);
+                if (tourObj.id === tourIdToRemove) {
+                    removeFollowerVacationsArray[removeFollowerArrayCount].isFollowed = null;
+                    break;
+                }
+                removeFollowerArrayCount = removeFollowerArrayCount + 1;
+              }
+
         break;
 
         case ActionType.SetUserType:

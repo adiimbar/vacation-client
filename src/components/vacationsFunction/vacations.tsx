@@ -62,7 +62,7 @@ function VacationsCards()  {
         const response = await apiService.get<VacationsDetails[]>("tours");
         // setVications(response.data);
         store.dispatch({ type: ActionType.GetAllVacations, payload: response.data});
-        console.log('get vacations was called');
+        // console.log('get vacations was called');
     }
 
     async function getFollowers() {
@@ -73,37 +73,61 @@ function VacationsCards()  {
     async function follow(vacationObj: any) {
         const response = await apiService.post<FollowDetails[]>("follow/addFollower", vacationObj);
         store.dispatch({ type: ActionType.AddUserFollow, payload: response.data});
+        console.log('follow response');
+        console.log(response.data);
+        console.log(store.getState().vacations);
     }
 
     async function unfollow(vacationId: any) {
         const response = await apiService.delete<FollowDetails[]>(`follow/${vacationId}`);
         store.dispatch({ type: ActionType.RemoveUserFollow, payload: response.data});
+        console.log('Unfollow response');
+        console.log(response.data);
+        console.log(store.getState().vacations);
     }
 
     function UserCardFollow(vacation: any) {
-        console.log(vacation);
-       return <Button type="primary" shape="round" onClick={() => followClickHandler(vacation.id)}>
-            follow
+        // console.log(vacation);
+        let isFollowedStatus: boolean;
+        let isFollowedText: string;
+        if (vacation.isFollowed) {
+            // console.log(`vacation ${vacation.id} is followed`);
+            isFollowedStatus = true;
+            isFollowedText = 'Unfollow';
+        } else {
+            // console.log(`vacation ${vacation.id} is not followed`);
+            isFollowedStatus = false;
+            isFollowedText = 'Follow';
+        }
+        return <Button type="primary" shape="round" onClick={() => followClickHandler(vacation.id, isFollowedStatus)}>
+            {isFollowedText}
         </Button>
     }
 
     function UserAdminEdit(vacation: any) {
-        return <Button type="primary" shape="circle" onClick={() => followClickHandler(vacation.id)}>
+        return <Button type="primary" shape="circle" onClick={() => editHandler(vacation.id)}>
             <EditOutlined />
         </Button>
     }
     
 
-    function followClickHandler(vacationId: any) {
+    function editHandler(vacationId: any) {
+        console.log('editHandler was clicked')
+    }
 
-        if(true) {
+    function followClickHandler(vacationId: any, isFollowedStatus: boolean) {
+
+        // console.log(`follow status: ${!isFollowedStatus}`)
+
+        if(isFollowedStatus === false) {
             let vacationObj = {
                 tourId: vacationId
             }
     
             follow(vacationObj)
 
-        } else if(false) {
+        } else if(isFollowedStatus === true) {
+            // console.log('inside followClickHandler - unfollow');
             unfollow(vacationId)
         }
     }

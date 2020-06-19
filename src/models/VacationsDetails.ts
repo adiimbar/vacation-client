@@ -7,7 +7,8 @@ export class VacationsDetails{
         public end_date?:Date,
         public price?:number,
         public id?:number,
-        public followers?:number
+        public followers?:number,
+        public isFollowed?:any
     ){}
 
 }
