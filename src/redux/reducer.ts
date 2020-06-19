@@ -45,6 +45,9 @@ export function reduce(oldAppState: AppState, action: Action): AppState {
                 // console.log(tourObj);
                 if (tourObj.id === isFollowing) {
                     addFollowerVacationsArray[addFollowerArrayCount].isFollowed = isFollowing;
+
+                    // probability should change it - it's supposed to update from socket
+                    addFollowerVacationsArray[addFollowerArrayCount].followers = addFollowerVacationsArray[addFollowerArrayCount].followers + 1;
                     break;
                 }
                 addFollowerArrayCount = addFollowerArrayCount + 1;
@@ -68,6 +71,9 @@ export function reduce(oldAppState: AppState, action: Action): AppState {
                 // console.log(tourObj);
                 if (tourObj.id === tourIdToRemove) {
                     removeFollowerVacationsArray[removeFollowerArrayCount].isFollowed = null;
+
+                    // same - probability should change it - it's supposed to update from socket
+                    removeFollowerVacationsArray[removeFollowerArrayCount].followers = removeFollowerVacationsArray[removeFollowerArrayCount].followers - 1;
                     break;
                 }
                 removeFollowerArrayCount = removeFollowerArrayCount + 1;
