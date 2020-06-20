@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 // import axios from "axios";
 import { VacationsDetails } from '../../models/VacationsDetails';
 import { FollowDetails } from '../../models/FollowDetails';
+import VacationUpdate from '../vacationUpdate/vacationUpdate';
+
 import { Unsubscribe } from "redux";
 import { store } from '../../redux/store';
 import { ActionType } from '../../redux/action-type';
@@ -32,6 +35,10 @@ function VacationsCards()  {
     // const [userType, setUserType] = useState('CUSTOMER');
     // const [userType, setUserType] = useState('ADMIN');
     const userType = store.getState().userType;
+
+
+    // let [vacationToFormEdit, setVacationToFormEdit] = useState();
+    const [showModal, setShowModal] = useState(true)
 
 
     let unsubscribeStore: Unsubscribe;
@@ -113,16 +120,26 @@ function VacationsCards()  {
     }
 
     function UserAdminEdit(vacation: any) {
-        return <Button type="primary" shape="circle" onClick={() => editHandler(vacation.id)}>
+        return <Button type="primary" shape="circle" onClick={() => editHandler(vacation)}>
             <EditOutlined />
         </Button>
     }
     
 
-    function editHandler(vacationId: any) {
+    function editHandler(vacation: any) {
         console.log('editHandler was clicked');
+        console.log(vacation);
+        // console.log('vacation to edit state');
+        // console.log(vacationToFormEdit);
+        // setVacationToFormEdit(preVacation => vacation);
+        // console.log(vacationToFormEdit);
 
+        ReactDOM.render(<VacationUpdate fromEdit={vacation} openModal={showModal} closeModal={unmoutModalElement} />, document.getElementById('modalContainer'))
         // need to call an editing form - the api Call can be in the form
+    }
+
+    function unmoutModalElement() {
+    ReactDOM.unmountComponentAtNode(document.getElementById('modalContainer'))
     }
 
     function followClickHandler(vacationId: any, isFollowedStatus: boolean) {
@@ -145,7 +162,16 @@ function VacationsCards()  {
     if (!(vacations && vacations.length)) return <> </>;
 
     return (
-        <div className='cardsContainer'>
+        <div className='cardsContainer' id='cardsContainer'>
+
+        {/* <VacationUpdate fromEdit={vacationToFormEdit}
+            open={true}
+            openModal={showModal}
+            // show={true}
+            // onClose={this.toggleModal}
+        /> */}
+
+        <div id='modalContainer'></div>
                 
         {vacations.map((vacation) => 
 

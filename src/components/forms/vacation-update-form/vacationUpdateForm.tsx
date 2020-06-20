@@ -21,6 +21,8 @@ const VacationUpdateForm = (props: any) => {
 
     useEffect(() => {
         inputRef.current.focus();
+
+        console.log(props);
     }, [])
     
     
