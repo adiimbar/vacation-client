@@ -75,17 +75,30 @@ export default class VacationUpdate extends Component<any, updateState, Vacation
 
   }
 
-  private vacationUpdate = async (vacationObject: any) => {
+  private vacationUpdate = async (vacationObject: any, id: number, image_path: string) => {
 
     console.log('inside vacationUpdate');
     console.log(vacationObject);
+    console.log(id);
+    console.log(image_path);
 
+    let startDate = vacationObject.range_picker[0];
+    let endDate = vacationObject.range_picker[1];
+
+
+    let vacationUpdateDetails = {
+        id: id,
+        destination: vacationObject.destination,
+        description: vacationObject.description,
+        image_path: image_path,
+        price: vacationObject.price,
+        start_date: startDate,
+        end_date: endDate
+    }
+
+
+        console.log(vacationUpdateDetails);
     try {
-        let vacationUpdateDetails = new VacationsDetails(                                                                
-          vacationObject.firstName,
-          vacationObject.lastName,
-          vacationObject.userName,
-          vacationObject.password);
           
         const response = await apiService.put<VacationsDetails[]>("tours", vacationUpdateDetails);
         const serverResponse = response.data;

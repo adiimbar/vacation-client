@@ -29,7 +29,7 @@ class ApiService {
     }
 
     async put<T = any, K = any>(partialUrl: string, data?: any, config?: AxiosRequestConfig) {
-        return await axios.post<T, K>(`${this.rootUrl}/${partialUrl}`, data, config);
+        return await axios.put<T, K>(`${this.rootUrl}/${partialUrl}`, data, config);
     }
 }
 
