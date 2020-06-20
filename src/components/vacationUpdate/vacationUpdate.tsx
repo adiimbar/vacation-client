@@ -105,7 +105,10 @@ export default class VacationUpdate extends Component<any, updateState, Vacation
         const statusResponse = response.status;
         console.log(serverResponse);
         console.log(statusResponse);
-
+        if(response.status === 200) {
+            message.success(`Vacation updated successfully`);
+            this.handleCancel();
+        }
     }
     catch (err) {
         // alert(err.message);
@@ -140,10 +143,11 @@ export default class VacationUpdate extends Component<any, updateState, Vacation
             // </Button>,
           // ]}
         >
-          <VacationUpdateForm vacationUpdateHandler={this.vacationUpdate} formEdit={this.props.formEdit} openModal={this.showModal}/>
+          <VacationUpdateForm vacationUpdateHandler={this.vacationUpdate} formEdit={this.props.formEdit} openModal={this.showModal} />
         </Modal>
       </React.Fragment>
       // </div>
     );
   }
 }
+
