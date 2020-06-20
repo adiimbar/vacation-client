@@ -17,6 +17,7 @@ const VacationUpdateForm = (props: any) => {
     // const [uploading, setUploading] = useState(false);
 
     let [selectedFile, setFile] = useState(null);
+    let [uploadedFileName, setUploadedFileName] = useState('');
 
 
     useEffect(() => {
@@ -24,69 +25,42 @@ const VacationUpdateForm = (props: any) => {
     }, [])
     
 
-	function onFileChange(event: any) { 
-	
+	function onFileChange(event: any) { 	
         // Update the state 
         setFile(selectedFile = event.target.files[0]); 
-        console.log('on change handler'); 
-        console.log(selectedFile);
-        console.log('after setFile'); 
     }; 
         
     // On file upload (click the upload button) 
     function onFileUpload() { 
-    
-    // Create an object of formData 
-    const formData = new FormData(); 
-    
-    console.log('formData before');
-    console.log(formData); 
+        
+        // Create an object of formData 
+        const formData = new FormData(); 
+        
+        // Update the formData object 
+        formData.append( "file", selectedFile);
 
-    // Update the formData object 
-    formData.append( "file", selectedFile);
-    console.log('formData');
-    console.log(formData); 
-
-    // formData.append( "file", selectedFile, selectedFile.name); 
-    
-    // Details of the uploaded file 
-    console.log('in on file upload');
-    console.log(selectedFile); 
-    
-    // Request made to the backend api 
-    // Send formData object
-    uploadFile(formData) 
-    // axios.post("api/uploadfile", formData); 
+        // send formData object 
+        uploadFile(formData) 
     }; 
+
     async function uploadFile(formData: any) {
-        console.log('form data:')
+        console.log('form data:');
         console.log(formData);
         const response = await apiService.post("uploads", formData);
-        console.log(response);
-        // store.dispatch({ type: ActionType.AddUserFollow, payload: response.data});
+
+        console.log('response');
+        console.log(response.data);
+        if(response.status === 200) {
+            message.success(`file uploaded successfully`);
+            setUploadedFileName(uploadedFileName = response.data.name);
+            console.log('uploadedFileName');
+            console.log(uploadedFileName);
+        }
     }
 
-
-    // async function handleUpload(image: any) {
-    //     console.log('uploadImage was clicked');
-
-    //     const fileListArray = fileList;
-    //     const formData = new FormData();
-    //     // fileList.forEach(file => {
-    //     //   formData.append('files[]', file);
-    //     // });
-    
-    //     setUploading(true)
-    
-
-    //     // const response = await apiService.post("uploads", image);
-    //     // return response.status
-    // }
-
-    // const uploadSettings = {
+    // const uploadSetings = {
     //     name: 'file',
-    //     multiple: false,
-    //     // action: 'http://localhost:3001/uploads',
+    //     action: 'http://localhost:3001/uploads',
     //     // headers: {
     //     //   authorization: 'authorization-text',
     //     // },
@@ -111,9 +85,18 @@ const VacationUpdateForm = (props: any) => {
           'range_picker': [rangeValue[0].format('YYYY-MM-DD'), rangeValue[1].format('YYYY-MM-DD')],
         };
         console.log('Received values of form: ', values);
+
+        console.log('image path');
+        console.log(uploadedFileName);
+        if(uploadedFileName !== '') {
+            // full image path should be done in the server
+            let imagePath = `http://localhost:3001/uploads/${uploadedFileName}`
+            props.vacationUpdateHandler(values, id, imagePath);
+        } else {
+            props.vacationUpdateHandler(values, id, image_path);
+        }
     
 
-        props.vacationUpdateHandler(values, id, image_path);
     };
 
     const { id, destination, description, image_path, start_date, end_date, price} = props.formEdit;
@@ -128,6 +111,7 @@ const VacationUpdateForm = (props: any) => {
                 destination: destination,
                 description: description,
                 price: price,
+                image_path: uploadedFileName,
                 // range_picker: [start_date.toString().slice(0, 10), end_date.toString().slice(0, 10)],
                 start_date: start_date.toString().slice(0, 10),
                 end_date: end_date.toString().slice(0, 10),
@@ -178,27 +162,18 @@ const VacationUpdateForm = (props: any) => {
             </Form.Item>
 
             {/* <Form.Item>
-                <Upload {...uploadSettings}>
+               <Upload {...uploadSetings}>
                     <Button>
                         <UploadOutlined /> Upload image
                     </Button>
                 </Upload>
-                <Button
-                    // type="primary"
-                    onClick={handleUpload}
-                    disabled={fileList.length === 0}
-                    loading={uploading}
-                    style={{ marginTop: 16 }}
-                    >
-                    {uploading ? 'Uploading' : 'Start Upload'}
-                </Button>
-
             </Form.Item> */}
 
             <Form.Item>
+                Add image if you want to update the current one
                 <Input type="file" name="file" onChange={onFileChange} /> 
 				    <Button onClick={onFileUpload}> 
-				    Upload image 
+                        <UploadOutlined /> Upload image 
 				    </Button> 
             </Form.Item>
 
