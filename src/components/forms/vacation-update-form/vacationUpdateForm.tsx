@@ -5,15 +5,6 @@ import './vacationUpdateForm.css';
 const { TextArea } = Input;
 const { RangePicker } = DatePicker;
 
-// const rangeConfig = {
-//     rules: [
-//       {
-//         type: 'array',
-//         required: true,
-//         message: 'Please select time!',
-//       },
-//     ],
-//   };
 
 const VacationUpdateForm = (props: any) => {
     // let destinationInput: any = null;
@@ -21,26 +12,23 @@ const VacationUpdateForm = (props: any) => {
 
     useEffect(() => {
         inputRef.current.focus();
-
-        console.log(props);
     }, [])
     
     
     const onFinish = (fieldsValue: any) => {
-        // console.log('Received values of form: ', values);
 
-        const rangeValue = fieldsValue['range-picker'];
+        const rangeValue = fieldsValue['range_picker'];
         const values = {
           ...fieldsValue,
-          'range-picker': [rangeValue[0].format('YYYY-MM-DD'), rangeValue[1].format('YYYY-MM-DD')],
+          'range_picker': [rangeValue[0].format('YYYY-MM-DD'), rangeValue[1].format('YYYY-MM-DD')],
         };
         console.log('Received values of form: ', values);
     
 
-        props.vacationUpdateHandler(values);
+        props.vacationUpdateHandler(values, id);
     };
 
-      
+    const { id, destination, description, image_path, start_date, end_date, price} = props.formEdit;
     return (
         <div className='vacationUpdateClass'>
         <Form
@@ -48,6 +36,14 @@ const VacationUpdateForm = (props: any) => {
             // form={form}
             name="register"
             onFinish={onFinish}
+            initialValues={{
+                destination: destination,
+                description: description,
+                price: price,
+                // range_picker: [start_date.toString().slice(0, 10), end_date.toString().slice(0, 10)],
+                start_date: start_date.toString().slice(0, 10),
+                end_date: end_date.toString().slice(0, 10),
+              }}
             scrollToFirstError
         >
 
@@ -65,7 +61,7 @@ const VacationUpdateForm = (props: any) => {
             </Form.Item>
 
             <Form.Item
-                name="range-picker"
+                name="range_picker"
                 rules={[
                     {
                       type: 'array',

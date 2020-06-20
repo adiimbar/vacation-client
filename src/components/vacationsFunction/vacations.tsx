@@ -30,15 +30,13 @@ function VacationsCards()  {
     // let followedTours = store.getState().userToursFollowings;
     // const [followedTours, updateFollowedTours] = useState();
 
-    
-    // Mock need to be removed
-    // const [userType, setUserType] = useState('CUSTOMER');
-    // const [userType, setUserType] = useState('ADMIN');
     const userType = store.getState().userType;
 
-
     // let [vacationToFormEdit, setVacationToFormEdit] = useState();
-    const [showModal, setShowModal] = useState(true)
+
+    // can probably be replaced with jest a const:
+    // const showModal: boolean = true;
+    const [showModal, setShowModal] = useState(true);
 
 
     let unsubscribeStore: Unsubscribe;
@@ -85,21 +83,21 @@ function VacationsCards()  {
         store.dispatch({ type: ActionType.RemoveUserFollow, payload: response.data});
     }
 
-    async function addVacation(vacationObj: any) {
-        const response = await apiService.post<VacationsDetails[]>("tours", vacationObj);
-        // store.dispatch({ type: ActionType.AddVacation, payload: response.data});
-        console.log('add vacation response');
-        console.log(response.data);
-        console.log(store.getState().vacations);
-    }
+    // async function addVacation(vacationObj: any) {
+    //     const response = await apiService.post<VacationsDetails[]>("tours", vacationObj);
+    //     // store.dispatch({ type: ActionType.AddVacation, payload: response.data});
+    //     console.log('add vacation response');
+    //     console.log(response.data);
+    //     console.log(store.getState().vacations);
+    // }
 
-    async function updateVacation(vacationObj: any) {
-        const response = await apiService.put<VacationsDetails[]>("tours", vacationObj);
-        // store.dispatch({ type: ActionType.AddVacation, payload: response.data});
-        console.log('update vacation response');
-        console.log(response.data);
-        console.log(store.getState().vacations);
-    }
+    // async function updateVacation(vacationObj: any) {
+    //     const response = await apiService.put<VacationsDetails[]>("tours", vacationObj);
+    //     // store.dispatch({ type: ActionType.AddVacation, payload: response.data});
+    //     console.log('update vacation response');
+    //     console.log(response.data);
+    //     console.log(store.getState().vacations);
+    // }
 
     function UserCardFollow(vacation: any) {
         // console.log(vacation);
@@ -134,10 +132,12 @@ function VacationsCards()  {
         // setVacationToFormEdit(preVacation => vacation);
         // console.log(vacationToFormEdit);
 
-        ReactDOM.render(<VacationUpdate fromEdit={vacation} openModal={showModal} closeModal={unmoutModalElement} />, document.getElementById('modalContainer'))
+        // calling vacation form modal and passing it the selected vacation data
+        ReactDOM.render(<VacationUpdate formEdit={vacation} openModal={showModal} closeModal={unmoutModalElement} />, document.getElementById('modalContainer'))
         // need to call an editing form - the api Call can be in the form
     }
 
+    // unmounts the vacation form modal from the DOM
     function unmoutModalElement() {
     ReactDOM.unmountComponentAtNode(document.getElementById('modalContainer'))
     }

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-// import axios from "axios";
 import { VacationsDetails } from '../../models/VacationsDetails';
-import 'antd/dist/antd.css';
-import { Modal, Button, message } from 'antd';
-// import VacationUpdateForm from '../forms/vacation-update-form';
 import VacationUpdateForm from '../forms/vacation-update-form/vacationUpdateForm';
-import './vacationUpdate.css';
+
+import { Modal, message } from 'antd';
+
 import apiService from '../../services/api.service';
+
+import 'antd/dist/antd.css';
+import './vacationUpdate.css';
 
 interface updateState {
   visible: boolean,
@@ -31,6 +31,7 @@ export default class VacationUpdate extends Component<any, updateState, Vacation
   }
 
   showModal = () => {
+      console.log('vacation update class - show modal');
       console.log(this.props);
     this.setState({
       visible: true,
@@ -65,12 +66,13 @@ export default class VacationUpdate extends Component<any, updateState, Vacation
   };
 
   componentDidMount() {
-      console.log('componentDidMount');
-      console.log(this.props);
-      console.log(this.props.openModal);
       this.setState({
         visible: this.props.openModal,
       })
+
+      console.log('vacation update class - show modal');
+      console.log(this.props);
+
   }
 
   private vacationUpdate = async (vacationObject: any) => {
@@ -125,7 +127,7 @@ export default class VacationUpdate extends Component<any, updateState, Vacation
             // </Button>,
           // ]}
         >
-          <VacationUpdateForm vacationUpdateHandler={this.vacationUpdate} fromEdit={this.props} openModal={this.showModal}/>
+          <VacationUpdateForm vacationUpdateHandler={this.vacationUpdate} formEdit={this.props.formEdit} openModal={this.showModal}/>
         </Modal>
       </React.Fragment>
       // </div>
