@@ -3,6 +3,7 @@ import { Form, Input, Button } from 'antd';
 import './registerForm.css';
 
 
+
 // const formItemLayout = {
 //     labelCol: {
 //         xs: { span: 24 },
@@ -118,7 +119,7 @@ const RegistrationForm = (props: any) => {
             <Form.Item >
                 <Button type="primary" htmlType="submit">
                     Register
-          </Button>
+                </Button>
             </Form.Item>
         </Form>
         </div>

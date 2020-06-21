@@ -11,9 +11,8 @@ import { ActionType } from '../../redux/action-type';
 
 import 'antd/dist/antd.css';
 // import { Button } from 'antd';
-import Register from '../register/register';
+// import Register from '../register/register';
 import LoginForm from '../forms/login-form/loginForm';
-import Example from '../fileUploadExample/fileUpload';
 import './login.css';
 import apiService from '../../services/api.service';
 
@@ -68,9 +67,7 @@ export default class Login extends Component<any, UserLoginDetails, SuccessfulLo
         return (
             <div className='loginContainer'>
                 <LoginForm loginHandler={this.login} />
-                <Register />
-
-                <Example />
+                {/* <Register /> */}
             </div>
         );
     }

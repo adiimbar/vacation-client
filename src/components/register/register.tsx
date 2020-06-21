@@ -91,7 +91,7 @@ export default class Register extends Component<any, RegisterState, UserRegistra
     return (
       // <div className="register">
       <React.Fragment>
-        <Button onClick={this.showModal}>
+        <Button onClick={this.showModal} className="registerButtonClass">
           register
         </Button>
 

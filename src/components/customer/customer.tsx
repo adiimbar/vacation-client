@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import axios from "axios";
-import './vacations.css';
+import './customer.css';
 import VacationsCards from '../vacationsFunction/vacations';
 import { VacationsDetails } from '../../models/VacationsDetails';
 import { FollowDetails } from '../../models/FollowDetails';

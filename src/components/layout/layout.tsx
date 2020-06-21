@@ -10,7 +10,7 @@ import "./layout.css";
 import Header from '../header/header';
 import Login from '../login/login';
 import Footer from '../footer/footer';
-import Vacations from '../vacations/vacations';
+import Customer from '../customer/customer';
 import Admin from '../admin/admin';
 import Charts from '../charts/charts';
 import socketIOClient from 'socket.io-client';
@@ -62,11 +62,10 @@ export default function Layout() {
                 <main>
                     <Switch>
                         <Route path="/home" component={Login} exact />
-                        <Route path="/main" component={Vacations} exact />
+                        <Route path="/main" component={Customer} exact />
                         <Route path="/admin" component={Admin} exact />
                         <Route path="/charts" component={Charts} exact />
-
-
+                        
                         <Redirect from="/" to="/home" exact />
                         {/* <Route component={PageNotFound} /> */}
                     </Switch>

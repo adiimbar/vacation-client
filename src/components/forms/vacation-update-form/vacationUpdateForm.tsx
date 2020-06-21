@@ -103,7 +103,7 @@ const VacationUpdateForm = (props: any) => {
 
     const { id, destination, description, image_path, start_date, end_date, price} = props.formEdit;
     return (
-        <div className='vacationUpdateClass'>
+        <div className='vacationFormClass'>
         <Form
             // {...formItemLayout}
             // form={form}

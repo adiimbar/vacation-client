@@ -199,7 +199,9 @@ function VacationsCards()  {
 
                 <div className='CardBodyClass'>
                     <br />
-                    <p className="description">{vacation.description}</p>
+                    <div className="descriptionClass">
+                        <p>{vacation.description}</p>
+                    </div>
                     <div className="detailsClass">
                         <div className="priceClass">
                             {`price: ${vacation.price}`}

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef} from 'react';
 import { Form, Input, Button } from 'antd';
 import Register from '../../register/register';
+import './loginForm.css';
 
 
 const layout = {
@@ -49,7 +50,7 @@ const LoginForm = (props: any) => {
 
 
             <Form.Item {...tailLayout}>
-                <Button type="primary" htmlType="submit">login</Button>
+                <Button type="primary" htmlType="submit" className="loginButtonClass" >login</Button>
                 <Register />
             </Form.Item>
         </Form>
