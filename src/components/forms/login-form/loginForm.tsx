@@ -7,9 +7,6 @@ import './loginForm.css';
 const layout = {
     wrapperCol: { offset: 8, span: 8 },
 };
-const tailLayout = {
-    wrapperCol: { offset: 11, span: 8 },
-};
 
 const LoginForm = (props: any) => {
     const onFinish = (values: any) => {
@@ -49,7 +46,8 @@ const LoginForm = (props: any) => {
             </Form.Item>
 
 
-            <Form.Item {...tailLayout}>
+            {/* <Form.Item {...tailLayout}> */}
+            <Form.Item>
                 <Button type="primary" htmlType="submit" className="loginButtonClass" >login</Button>
                 <Register />
             </Form.Item>
