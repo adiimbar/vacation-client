@@ -12,6 +12,7 @@ import { store } from '../../redux/store';
 import VacationsCards from '../vacationsFunction/vacations';
 import VacationUpdate from '../vacationUpdate/vacationUpdate';
 import AddVacationComponent from '../addVacationComponent/addVacationComponent';
+import { Button } from 'antd';
 
 // import Charts from '../charts/charts';
 
@@ -31,6 +32,8 @@ export default class Admin extends Component <any, VacationsState>{
             vacations:[]
         };
 
+        this.watchChartsHandler = this.watchChartsHandler.bind(this);
+
         this.unsubscribeStore = store.subscribe(
             // In fact, the following function is our "listener", "refresh function"
             () => this.setState(
@@ -47,12 +50,17 @@ export default class Admin extends Component <any, VacationsState>{
     componentDidMount() {
     }
 
-
+    watchChartsHandler() {
+        this.props.history.push('/charts');
+    }
 
     public render() {
         return (
             <div className='adminContainer'>
-                <AddVacationComponent />
+                <div className="adminToolbar">
+                    <AddVacationComponent />
+                    <Button type="primary" className="statisticsButton" onClick={this.watchChartsHandler}>watch statistics</Button>
+                </div>
                 <VacationUpdate />
                 <VacationsCards />
             </div>

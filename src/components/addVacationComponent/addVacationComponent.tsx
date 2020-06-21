@@ -7,6 +7,7 @@ import { Modal, Button, message } from 'antd';
 import apiService from '../../services/api.service';
 
 import 'antd/dist/antd.css';
+import './addVacationComponent.css';
 
 interface updateState {
   visible: boolean,
@@ -69,17 +70,17 @@ export default class AddVacationComponent extends Component<any, updateState, Va
         visible: this.props.openModal,
       })
 
-      console.log('vacation update class - show modal');
-      console.log(this.props);
+    //   console.log('vacation update class - show modal');
+    //   console.log(this.props);
 
   }
 
     // private vacationUpdate = async (vacationObject: any, id: number, image_path: string) => {
     private vacationUpdate = async (vacationObject: any, image_path: string) => {
 
-    console.log('inside vacationUpdate');
-    console.log(vacationObject);
-    console.log(image_path);
+    // console.log('inside vacationUpdate');
+    // console.log(vacationObject);
+    // console.log(image_path);
 
     let startDate = vacationObject.range_picker[0];
     let endDate = vacationObject.range_picker[1];
@@ -100,12 +101,12 @@ export default class AddVacationComponent extends Component<any, updateState, Va
     try {
           
         const response = await apiService.post<VacationsDetails[]>("tours", addVacationDetails);
-        const serverResponse = response.data;
-        const statusResponse = response.status;
-        console.log(serverResponse);
-        console.log(statusResponse);
+        // const serverResponse = response.data;
+        // const statusResponse = response.status;
+        // console.log(serverResponse);
+        // console.log(statusResponse);
         if(response.status === 200) {
-            message.success(`Vacation updated successfully`);
+            message.success(`Vacation added successfully`);
             this.handleCancel();
         }
     }
@@ -122,7 +123,7 @@ export default class AddVacationComponent extends Component<any, updateState, Va
     return (
       // <div className="register">
       <React.Fragment>
-        <Button onClick={this.showModal}>
+        <Button type="primary" className="addVacationButton" onClick={this.showModal}>
           Add vacation
         </Button>
 

@@ -31,23 +31,23 @@ import "./header.css";
 
 
 const Header = (props: any) => {
-    const history = useHistory();
+    // const history = useHistory();
 
-    function vacationsButton() {
-        history.push('/admin');
-    }
+    // function vacationsButton() {
+    //     history.push('/admin');
+    // }
 
-    function statisticsButton() {
-        history.push("/charts");
-    };
+    // function statisticsButton() {
+    //     history.push("/charts");
+    // };
 
     return (
         <div className="header">
-        {/* <h1>Header works!</h1> */}
-        <Menu theme="dark" mode="horizontal">
+        <h1>Header works!</h1>
+        {/* <Menu theme="dark" mode="horizontal">
             <Menu.Item key="1"onClick={vacationsButton}>vacations</Menu.Item>
             <Menu.Item key="2" onClick={statisticsButton}>statistics</Menu.Item>
-        </Menu>
+        </Menu> */}
     </div>
     )
 

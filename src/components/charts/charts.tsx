@@ -6,6 +6,8 @@ import { Unsubscribe } from "redux";
 import { store } from '../../redux/store';
 import { ActionType } from '../../redux/action-type';
 import apiService from '../../services/api.service';
+
+import { Button } from 'antd';
 import {Bar} from 'react-chartjs-2';
 
 
@@ -40,6 +42,8 @@ export default class Charts extends Component <any, ToursFollowersState>{
             vacationsFollowersNumbers:[] 
         
         };
+
+        this.backToAdminHandler = this.backToAdminHandler.bind(this)
         // let tourDestinations: any = [];
     }
 
@@ -140,10 +144,8 @@ export default class Charts extends Component <any, ToursFollowersState>{
     //     chart.update();
     // }
 
-
-
-    asdf() {
-        // this.addData(this.data, this.state.vacationsDestinations, this.state.vacationsFollowersNumbers)
+    backToAdminHandler() {
+        this.props.history.push('/admin');
     }
     
     data = {
@@ -168,7 +170,9 @@ export default class Charts extends Component <any, ToursFollowersState>{
         return (
             <div className='chartsContainer'>
 
-                <button onClick={this.asdf}>asdf</button>
+                <div className="editingToolbar">
+                    <Button type="primary" onClick={this.backToAdminHandler}>Editing panle</Button>
+                </div>
 
                 <div>
                     <h2>Vacations followers statistics</h2>
