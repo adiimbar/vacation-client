@@ -11,6 +11,7 @@ import { store } from '../../redux/store';
 
 import VacationsCards from '../vacationsFunction/vacations';
 import VacationUpdate from '../vacationUpdate/vacationUpdate';
+import AddVacationComponent from '../addVacationComponent/addVacationComponent';
 
 // import Charts from '../charts/charts';
 
@@ -51,6 +52,7 @@ export default class Admin extends Component <any, VacationsState>{
     public render() {
         return (
             <div className='adminContainer'>
+                <AddVacationComponent />
                 <VacationUpdate />
                 <VacationsCards />
             </div>
