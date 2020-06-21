@@ -23,7 +23,6 @@ export function reduce(oldAppState: AppState, action: Action): AppState {
                 userToursFollowings[key] = true;
             });
             newAppState.userToursFollowings = userToursFollowings;
-            console.log(userToursFollowings)
             // newAppState.userToursFollowings = action.payload;
             break;
 
@@ -36,13 +35,8 @@ export function reduce(oldAppState: AppState, action: Action): AppState {
             let isFollowing: any = addObj.tourId;
             let addFollowerVacationsArray = newAppState.vacations;
             let addFollowerArrayCount: number = 0;
-            // console.log('in reducer');
-            // console.log(isFollowing);
-            // console.log(addFollowerVacationsArray);
 
             for (let tourObj of addFollowerVacationsArray) {
-                // console.log(addFollowerArrayCount);
-                // console.log(tourObj);
                 if (tourObj.id === isFollowing) {
                     addFollowerVacationsArray[addFollowerArrayCount].isFollowed = isFollowing;
 
@@ -52,23 +46,16 @@ export function reduce(oldAppState: AppState, action: Action): AppState {
                 }
                 addFollowerArrayCount = addFollowerArrayCount + 1;
               }
-
             break;
 
         case ActionType.RemoveUserFollow:
             let removeObj = action.payload;
-            // console.log('in reducer remove follower');
             let tourIdToRemove: number = Number(removeObj.tourId);
 
             let removeFollowerVacationsArray = newAppState.vacations;
             let removeFollowerArrayCount: number = 0;
-            // console.log('in reducer');
-            // console.log(tourIdToRemove);
-            // console.log(removeFollowerVacationsArray);
 
             for (let tourObj of removeFollowerVacationsArray) {
-                // console.log(removeFollowerArrayCount);
-                // console.log(tourObj);
                 if (tourObj.id === tourIdToRemove) {
                     removeFollowerVacationsArray[removeFollowerArrayCount].isFollowed = null;
 
@@ -78,7 +65,6 @@ export function reduce(oldAppState: AppState, action: Action): AppState {
                 }
                 removeFollowerArrayCount = removeFollowerArrayCount + 1;
               }
-
         break;
 
         case ActionType.SetUserType:

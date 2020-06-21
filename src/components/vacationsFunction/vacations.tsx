@@ -15,9 +15,6 @@ import apiService from '../../services/api.service';
 
 import './vacations.css';
 
-// interface VacationsState {
-//     vacations: VacationsDetails[]
-// }
 
 const { Meta } = Card;
 
@@ -25,19 +22,12 @@ const { Meta } = Card;
 function VacationsCards()  {
     // let vacations: VacationsDetails[] = [];
     let vacations = store.getState().vacations;
-    // const [vacations, setVacations] = useState([]);
-
-    // let followedTours = store.getState().userToursFollowings;
-    // const [followedTours, updateFollowedTours] = useState();
 
     const userType = store.getState().userType;
-
-    // let [vacationToFormEdit, setVacationToFormEdit] = useState();
 
     // can probably be replaced with jest a const:
     // const showModal: boolean = true;
     const [showModal, setShowModal] = useState(true);
-
 
     let unsubscribeStore: Unsubscribe;
 
@@ -59,7 +49,6 @@ function VacationsCards()  {
     useEffect( () => {
         getVacations();
         getFollowers();
-        // followedTours = store.getState().userToursFollowings;
         
     }, []);
 
@@ -83,32 +72,13 @@ function VacationsCards()  {
         store.dispatch({ type: ActionType.RemoveUserFollow, payload: response.data});
     }
 
-    // async function addVacation(vacationObj: any) {
-    //     const response = await apiService.post<VacationsDetails[]>("tours", vacationObj);
-    //     // store.dispatch({ type: ActionType.AddVacation, payload: response.data});
-    //     console.log('add vacation response');
-    //     console.log(response.data);
-    //     console.log(store.getState().vacations);
-    // }
-
-    // async function updateVacation(vacationObj: any) {
-    //     const response = await apiService.put<VacationsDetails[]>("tours", vacationObj);
-    //     // store.dispatch({ type: ActionType.AddVacation, payload: response.data});
-    //     console.log('update vacation response');
-    //     console.log(response.data);
-    //     console.log(store.getState().vacations);
-    // }
-
     function UserCardFollow(vacation: any) {
-        // console.log(vacation);
         let isFollowedStatus: boolean;
         let isFollowedText: string;
         if (vacation.isFollowed) {
-            // console.log(`vacation ${vacation.id} is followed`);
             isFollowedStatus = true;
             isFollowedText = 'Unfollow';
         } else {
-            // console.log(`vacation ${vacation.id} is not followed`);
             isFollowedStatus = false;
             isFollowedText = 'Follow';
         }
@@ -125,12 +95,6 @@ function VacationsCards()  {
     
 
     function editHandler(vacation: any) {
-        console.log('editHandler was clicked');
-        console.log(vacation);
-        // console.log('vacation to edit state');
-        // console.log(vacationToFormEdit);
-        // setVacationToFormEdit(preVacation => vacation);
-        // console.log(vacationToFormEdit);
 
         // calling vacation form modal and passing it the selected vacation data
         ReactDOM.render(<VacationUpdate formEdit={vacation} openModal={showModal} closeModal={unmoutModalElement} />, document.getElementById('modalContainer'))
@@ -144,8 +108,6 @@ function VacationsCards()  {
 
     function followClickHandler(vacationId: any, isFollowedStatus: boolean) {
 
-        // console.log(`follow status: ${!isFollowedStatus}`)
-
         if(isFollowedStatus === false) {
             let vacationObj = {
                 tourId: vacationId
@@ -154,7 +116,6 @@ function VacationsCards()  {
             follow(vacationObj)
 
         } else if(isFollowedStatus === true) {
-            // console.log('inside followClickHandler - unfollow');
             unfollow(vacationId)
         }
     }
@@ -163,13 +124,6 @@ function VacationsCards()  {
 
     return (
         <div className='cardsContainer' id='cardsContainer'>
-
-        {/* <VacationUpdate fromEdit={vacationToFormEdit}
-            open={true}
-            openModal={showModal}
-            // show={true}
-            // onClose={this.toggleModal}
-        /> */}
 
         <div id='modalContainer'></div>
                 
@@ -182,7 +136,7 @@ function VacationsCards()  {
                 key={vacation.id}
                 style={{ width: 300 }}
                 cover={
-                <img
+                <img className="cardImageClass"
                     alt="Oops I'm missing"
                     src={vacation.image_path}
                 />

@@ -20,19 +20,13 @@ export default class VacationUpdate extends Component<any, updateState, Vacation
   constructor(props: any) {
     super(props);
 
-    // this.container = container;
-
     this.state = {
       visible: false,
       confirmLoading: false,
     };
-
-    // this.handleOk = this.handleOk.bind(this);
   }
 
   showModal = () => {
-      console.log('vacation update class - show modal');
-      console.log(this.props);
     this.setState({
       visible: true,
     });
@@ -43,15 +37,15 @@ export default class VacationUpdate extends Component<any, updateState, Vacation
       //   ModalText: 'The modal will be closed after two seconds',
       confirmLoading: true,
     });
-    setTimeout(() => {
-      this.setState({
-        visible: false,
-        confirmLoading: false,
-      });
-      // this.register();
-      this.successfulRegistrationMessage();
-      ;
-    }, 2000);
+    // setTimeout(() => {
+    //   this.setState({
+    //     visible: false,
+    //     confirmLoading: false,
+    //   });
+    //   // this.register();
+    //   this.successfulRegistrationMessage();
+    //   ;
+    // }, 2000);
   };
 
   handleCancel = () => {
@@ -70,17 +64,9 @@ export default class VacationUpdate extends Component<any, updateState, Vacation
         visible: this.props.openModal,
       })
 
-      console.log('vacation update class - show modal');
-      console.log(this.props);
-
   }
 
   private vacationUpdate = async (vacationObject: any, id: number, image_path: string) => {
-
-    console.log('inside vacationUpdate');
-    console.log(vacationObject);
-    console.log(id);
-    console.log(image_path);
 
     let startDate = vacationObject.range_picker[0];
     let endDate = vacationObject.range_picker[1];
@@ -96,15 +82,10 @@ export default class VacationUpdate extends Component<any, updateState, Vacation
         end_date: endDate
     }
 
-
-        console.log(vacationUpdateDetails);
     try {
           
         const response = await apiService.put<VacationsDetails[]>("tours", vacationUpdateDetails);
-        const serverResponse = response.data;
-        const statusResponse = response.status;
-        console.log(serverResponse);
-        console.log(statusResponse);
+
         if(response.status === 200) {
             message.success(`Vacation updated successfully`);
             this.handleCancel();
@@ -121,7 +102,6 @@ export default class VacationUpdate extends Component<any, updateState, Vacation
   public render() {
     const { visible, confirmLoading } = this.state;
     return (
-      // <div className="register">
       <React.Fragment>
         {/* <Button onClick={this.showModal}>
           Update vacation
@@ -134,19 +114,10 @@ export default class VacationUpdate extends Component<any, updateState, Vacation
           confirmLoading={confirmLoading}
           onCancel={this.handleCancel}
           footer={null}
-          // footer={[
-            // <Button key="back" onClick={this.handleCancel}>
-            //   Cancel
-            // </Button>,
-            // <Button key="submit" type="primary" loading={confirmLoading} onClick={this.handleOk}>
-            //   Submit
-            // </Button>,
-          // ]}
         >
           <VacationUpdateForm vacationUpdateHandler={this.vacationUpdate} formEdit={this.props.formEdit} openModal={this.showModal} />
         </Modal>
       </React.Fragment>
-      // </div>
     );
   }
 }
