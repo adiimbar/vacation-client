@@ -1,8 +1,6 @@
 import React, { useEffect, useState} from 'react';
 import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
-// import ReactDOM from 'react-dom';
-import 'antd/dist/antd.css';
-// import { Layout, Menu, Breadcrumb } from 'antd';
+
 import jwtDecode from 'jwt-decode';
 import { store } from '../../redux/store';
 import { ActionType } from '../../redux/action-type';
@@ -14,10 +12,7 @@ import Customer from '../customer/customer';
 import Admin from '../admin/admin';
 import Charts from '../charts/charts';
 import socketIOClient from 'socket.io-client';
-// import { store } from '../../redux/store';
 
-// need to remove this
-// import Register from '../register/register'
 
 export default function Layout() {
     const [userId, setUserId] = useState(null);
@@ -65,7 +60,7 @@ export default function Layout() {
                         <Route path="/main" component={Customer} exact />
                         <Route path="/admin" component={Admin} exact />
                         <Route path="/charts" component={Charts} exact />
-                        
+
                         <Redirect from="/" to="/home" exact />
                         {/* <Route component={PageNotFound} /> */}
                     </Switch>
