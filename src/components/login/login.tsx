@@ -66,8 +66,18 @@ export default class Login extends Component<any, UserLoginDetails, SuccessfulLo
 
         return (
             <div className='loginContainer'>
+                <br />
+                <div className="loginFillClass">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <h2>Don't forget your towel</h2>
+                </div>
+                <div className="loginClass">
                 <LoginForm loginHandler={this.login} />
-                {/* <Register /> */}
+                </div>
             </div>
         );
     }

@@ -5,10 +5,10 @@ import './loginForm.css';
 
 
 const layout = {
-    wrapperCol: { offset: 7, span: 10 },
+    wrapperCol: { offset: 8, span: 8 },
 };
 const tailLayout = {
-    wrapperCol: { offset: 8, span: 16 },
+    wrapperCol: { offset: 11, span: 8 },
 };
 
 const LoginForm = (props: any) => {

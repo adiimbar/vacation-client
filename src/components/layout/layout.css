@@ -18,7 +18,7 @@
 .layout>main {
     grid-column: span 12;
     background: #fff;
-    padding: 24px 50px;
+    /* padding: 24px 50px; */
     /* min-height: 280px; */
 }
 
