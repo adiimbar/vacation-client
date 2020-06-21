@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Form, Input, Button, DatePicker, Upload, message } from 'antd';
+import { Form, Input, Button, DatePicker, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
 import apiService from '../../../services/api.service';
@@ -11,10 +11,8 @@ const { RangePicker } = DatePicker;
 
 
 const VacationUpdateForm = (props: any) => {
-    // let destinationInput: any = null;
+
     const inputRef = useRef(null);
-    // const [fileList, setFile] = useState([]);
-    // const [uploading, setUploading] = useState(false);
 
     let [selectedFile, setFile] = useState(null);
     let [uploadedFileName, setUploadedFileName] = useState('');
@@ -22,8 +20,6 @@ const VacationUpdateForm = (props: any) => {
 
     useEffect(() => {
         inputRef.current.focus();
-        console.log('props')
-        console.log(props);
     }, [])
     
 
@@ -60,25 +56,6 @@ const VacationUpdateForm = (props: any) => {
         }
     }
 
-    // const uploadSetings = {
-    //     name: 'file',
-    //     action: 'http://localhost:3001/uploads',
-    //     // headers: {
-    //     //   authorization: 'authorization-text',
-    //     // },
-    //     onChange(info: any) {
-    //       if (info.file.status !== 'uploading') {
-    //         console.log(info.file, info.fileList);
-    //       }
-    //       if (info.file.status === 'done') {
-    //         message.success(`${info.file.name} file uploaded successfully`);
-    //       } else if (info.file.status === 'error') {
-    //         message.error(`${info.file.name} file upload failed.`);
-    //       }
-    //     },
-    //   };
-      
-
     const onFinish = (fieldsValue: any) => {
 
         const rangeValue = fieldsValue['range_picker'];
@@ -98,7 +75,6 @@ const VacationUpdateForm = (props: any) => {
             props.vacationUpdateHandler(values, id, image_path);
         }
     
-
     };
 
     const { id, destination, description, image_path, start_date, end_date, price} = props.formEdit;
@@ -128,9 +104,6 @@ const VacationUpdateForm = (props: any) => {
                 <Input 
                     placeholder="Destination"
                     ref={inputRef}
-                    // ref={input => {
-                    //     destinationInput = input;
-                    //   }}
                 />
             </Form.Item>
 
@@ -162,14 +135,6 @@ const VacationUpdateForm = (props: any) => {
             >
                 <TextArea placeholder="Vacation description" allowClear />
             </Form.Item>
-
-            {/* <Form.Item>
-               <Upload {...uploadSetings}>
-                    <Button>
-                        <UploadOutlined /> Upload image
-                    </Button>
-                </Upload>
-            </Form.Item> */}
 
             <Form.Item>
                 Add image if you want to update the current one
