@@ -5,5 +5,7 @@ export enum ActionType {
     AddUserFollow,
     RemoveUserFollow,
     SetUserType,
+    AddVacationToStore,
+    UpdateVacationInStore,
     Login    
 }

@@ -31,6 +31,25 @@ export default function Layout() {
         }
     }, []);
 
+    // // listener for updated vacations
+    // useEffect(() => {
+    //     if (userId) {
+    //         console.log('connecting');
+    //         console.log('userId', userId);
+    //         const socket = socketIOClient('localhost:3001', {
+    //             query: `userId=${userId}`
+    //         });
+
+    //         socket.on('tour-update', (updatedTour: any) => {
+    //            console.log('a new update!!! i am so happy');
+    //            console.log('new tour update data', updatedTour);
+    //            store.dispatch({ type: ActionType.UpdateVacationInStore, payload: updatedTour});
+    //         });
+    //     }
+
+    // }, [userId]);
+
+    // listener for added vacations
     useEffect(() => {
         if (userId) {
             console.log('connecting');
@@ -39,12 +58,23 @@ export default function Layout() {
                 query: `userId=${userId}`
             });
 
-            socket.on('new-tour-update', () => {
-               console.log('a new update!!! i am so happy');
+            socket.on('tour-update', (updatedTour: any) => {
+                console.log('a new update!!! i am so happy');
+                console.log('new tour update data', updatedTour);
+                store.dispatch({ type: ActionType.UpdateVacationInStore, payload: updatedTour});
+            });
+ 
+
+            socket.on('new-tour', (newTour: any) => {
+               console.log('a new tour!!!');
+               console.log('new tour update data', newTour);
+               store.dispatch({ type: ActionType.AddVacationToStore, payload: newTour});
+
             });
         }
 
     }, [userId]);
+
 
     return (
 

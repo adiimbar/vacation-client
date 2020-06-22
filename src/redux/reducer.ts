@@ -2,7 +2,7 @@ import { AppState } from "./app-state";
 import { ActionType } from "./action-type";
 import { Action } from "./action";
 
-// This function is NOT called direcrtly by you
+// This need to break the reducer into components
 export function reduce(oldAppState: AppState, action: Action): AppState {
     // Cloning the oldState (creating a copy)
     const newAppState = { ...oldAppState };
@@ -65,8 +65,36 @@ export function reduce(oldAppState: AppState, action: Action): AppState {
                 }
                 removeFollowerArrayCount = removeFollowerArrayCount + 1;
               }
-        break;
+            break;
 
+        case ActionType.AddVacationToStore:
+            let newVacation = action.payload;
+            newVacation['isFollowed'] = null;
+
+            newAppState.vacations.push(newVacation);
+            break;
+
+        case ActionType.UpdateVacationInStore:
+            let updatedVacation = action.payload;
+
+            for (let vacationObj of newAppState.vacations) {
+                if(updatedVacation.id === vacationObj.id) {
+
+                    vacationObj.description = updatedVacation.description;
+                    vacationObj.destination = updatedVacation.destination;
+                    vacationObj.end_date = updatedVacation.end_date;
+                    vacationObj.followers = updatedVacation.followers;
+                    vacationObj.image_path = updatedVacation.image_path;
+                    vacationObj.price = updatedVacation.price;
+                    vacationObj.start_date = updatedVacation.start_date;
+
+                    break;
+                }
+
+            }
+
+            break;
+    
         case ActionType.SetUserType:
             newAppState.userType = action.payload;
             break;
