@@ -17,6 +17,7 @@ import socketIOClient from 'socket.io-client';
 export default function Layout() {
     const [userId, setUserId] = useState(null);
 
+
     useEffect(() => {
         const userId = sessionStorage.getItem('userId');
         // const userId = store.getState().;
@@ -31,46 +32,40 @@ export default function Layout() {
         }
     }, []);
 
-    // // listener for updated vacations
-    // useEffect(() => {
-    //     if (userId) {
-    //         console.log('connecting');
-    //         console.log('userId', userId);
-    //         const socket = socketIOClient('localhost:3001', {
-    //             query: `userId=${userId}`
-    //         });
-
-    //         socket.on('tour-update', (updatedTour: any) => {
-    //            console.log('a new update!!! i am so happy');
-    //            console.log('new tour update data', updatedTour);
-    //            store.dispatch({ type: ActionType.UpdateVacationInStore, payload: updatedTour});
-    //         });
-    //     }
-
-    // }, [userId]);
-
-    // listener for added vacations
     useEffect(() => {
-        if (userId) {
-            console.log('connecting');
-            console.log('userId', userId);
-            const socket = socketIOClient('localhost:3001', {
-                query: `userId=${userId}`
-            });
 
-            socket.on('tour-update', (updatedTour: any) => {
-                console.log('a new update!!! i am so happy');
-                console.log('new tour update data', updatedTour);
-                store.dispatch({ type: ActionType.UpdateVacationInStore, payload: updatedTour});
-            });
- 
+        const socketConnectionListener = setInterval(setUpFirstConnectionWithUserId, 1000);
 
-            socket.on('new-tour', (newTour: any) => {
-               console.log('a new tour!!!');
-               console.log('new tour update data', newTour);
-               store.dispatch({ type: ActionType.AddVacationToStore, payload: newTour});
+        function setUpFirstConnectionWithUserId() {
+            // console.log('setUpFirstConnectionWithUserId was called');
+            const userId = sessionStorage.getItem('userId');
 
-            });
+
+            if (userId) {
+                // console.log('connecting');
+                // console.log('userId', userId);
+                const socket = socketIOClient('localhost:3001', {
+                    query: `userId=${userId}`
+                });
+
+                // const socket = setUpConnectionWithUserId()
+
+                // listener for updated vacations
+                socket.on('tour-update', (updatedTour: any) => {
+                    // console.log('a new update!!! i am so happy');
+                    // console.log('new tour update data', updatedTour);
+                    store.dispatch({ type: ActionType.UpdateVacationInStore, payload: updatedTour});
+                });
+    
+                // listener for added vacations
+                socket.on('new-tour', (newTour: any) => {
+                // console.log('a new tour!!!');
+                // console.log('new tour update data', newTour);
+                store.dispatch({ type: ActionType.AddVacationToStore, payload: newTour});
+                });
+
+                clearInterval(socketConnectionListener);
+            }
         }
 
     }, [userId]);
