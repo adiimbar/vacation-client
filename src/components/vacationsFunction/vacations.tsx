@@ -10,7 +10,7 @@ import { store } from '../../redux/store';
 import { ActionType } from '../../redux/action-type';
 
 import { Card, Button } from 'antd';
-import { EditOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import apiService from '../../services/api.service';
 
 import './vacations.css';
@@ -48,7 +48,7 @@ function VacationsCards()  {
 
     useEffect( () => {
         getVacations();
-        getFollowers();
+        // getFollowers();
         
     }, []);
 
@@ -57,10 +57,19 @@ function VacationsCards()  {
         store.dispatch({ type: ActionType.GetAllVacations, payload: response.data});
     }
 
-    async function getFollowers() {
-        const response = await apiService.get<FollowDetails[]>("follow/userFollowings");
-        store.dispatch({ type: ActionType.GetUserFollowings, payload: response.data});
+    async function deleteVacation(vacationId: number) {
+        const response = await apiService.delete<VacationsDetails[]>(`tours/${vacationId}`);
+
+        if(response.status === 200) {
+        store.dispatch({ type: ActionType.DeleteVacation, payload: response.data});
+        // store.dispatch({ type: ActionType.DeleteVacation, payload: vacationId});
+        }
     }
+
+    // async function getFollowers() {
+    //     const response = await apiService.get<FollowDetails[]>("follow/userFollowings");
+    //     store.dispatch({ type: ActionType.GetUserFollowings, payload: response.data});
+    // }
 
     async function follow(vacationObj: any) {
         const response = await apiService.post<FollowDetails[]>("follow/addFollower", vacationObj);
@@ -88,11 +97,26 @@ function VacationsCards()  {
     }
 
     function UserAdminEdit(vacation: any) {
-        return <Button type="primary" shape="circle" onClick={() => editHandler(vacation)}>
-            <EditOutlined />
-        </Button>
+        return <div> 
+                    <Button type="primary" shape="circle" onClick={() => editHandler(vacation)}>
+                        <EditOutlined />
+                    </Button>
+                    <span className="separationSpan" />
+                    <Button type="primary" shape="circle" onClick={() => deleteHandler(vacation)} danger>
+                        <DeleteOutlined />
+                    </Button>
+                </div>
     }
     
+    function deleteHandler(vacation: any) {
+        console.log(vacation);
+
+        let deleteConfirmation = window.confirm(`are you sure you want to delete vacation: ${vacation.destination}?`);
+        if(deleteConfirmation) {
+            console.log(vacation.id);
+            deleteVacation(vacation.id)
+        }
+    }
 
     function editHandler(vacation: any) {
 

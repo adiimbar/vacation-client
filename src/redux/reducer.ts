@@ -2,7 +2,7 @@ import { AppState } from "./app-state";
 import { ActionType } from "./action-type";
 import { Action } from "./action";
 
-// This need to break the reducer into components
+// need to break the reducer into components
 export function reduce(oldAppState: AppState, action: Action): AppState {
     // Cloning the oldState (creating a copy)
     const newAppState = { ...oldAppState };
@@ -73,6 +73,21 @@ export function reduce(oldAppState: AppState, action: Action): AppState {
 
             newAppState.vacations.push(newVacation);
             break;
+
+        case ActionType.DeleteVacation:
+            let idOfVacationToDelete = Number(action.payload);
+            let index = 0;
+
+            for (let vacationObj of newAppState.vacations) {
+                if(idOfVacationToDelete === vacationObj.id) {
+                    newAppState.vacations.splice(index, 1);
+
+                    break;
+                }
+                index = index + 1;
+            }
+            break;
+    
 
         case ActionType.UpdateVacationInStore:
             let updatedVacation = action.payload;

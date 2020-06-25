@@ -7,5 +7,6 @@ export enum ActionType {
     SetUserType,
     AddVacationToStore,
     UpdateVacationInStore,
+    DeleteVacation,
     Login    
 }

@@ -61,8 +61,8 @@ export default class Register extends Component<any, RegisterState, UserRegistra
 
   private register = async (registerObject: any) => {
 
-    console.log('inside register');
-    console.log(registerObject);
+    // console.log('inside register');
+    // console.log(registerObject);
 
     try {
         let userRegistrationDetails = new UserRegistrationDetails(                                                                
@@ -72,10 +72,17 @@ export default class Register extends Component<any, RegisterState, UserRegistra
           registerObject.password);
           
         const response = await apiService.post<UserRegistrationDetails[]>("users/register", userRegistrationDetails);
-        const serverResponse = response.data;
-        const statusResponse = response.status;
-        console.log(serverResponse);
-        console.log(statusResponse);
+
+        // need to put a message - registerd sucsseccfuly
+        if(response.status === 200) {
+          message.success(`Registered successfully`);
+          this.handleCancel();
+        }
+
+        // const serverResponse = response.data;
+        // const statusResponse = response.status;
+        // console.log(serverResponse);
+        // console.log(statusResponse);
 
     }
     catch (err) {

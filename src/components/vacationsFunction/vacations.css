@@ -1,6 +1,7 @@
 .cardDiv {
-    margin: 20px;
+    margin: 15px;
     float: left;
+    height: 400px !important;
 }
 
 .CardBodyClass {
@@ -34,4 +35,8 @@
 .cardImageClass {
   height: 199px;
   width: 300px;
+}
+
+.separationSpan {
+  margin: 5px;
 }
