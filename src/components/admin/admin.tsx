@@ -44,7 +44,7 @@ export default class Admin extends Component <any, VacationsState>{
     }
 
     componentWillUnmount(){
-        // this.unsubscribeStore();
+        this.unsubscribeStore();
     }
     
     componentDidMount() {
