@@ -10,7 +10,6 @@ const layout = {
 
 const LoginForm = (props: any) => {
     const onFinish = (values: any) => {
-        console.log('Success:', values);
         props.loginHandler(values)
     };
 

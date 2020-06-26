@@ -38,7 +38,7 @@ const RegistrationForm = (props: any) => {
         firstNameInput.focus();
     })
     
-    
+        
     const onFinish = (values: any) => {
         // console.log('Received values of form: ', values);
           props.registrationHandler(values);
@@ -52,6 +52,13 @@ const RegistrationForm = (props: any) => {
             name="register"
             onFinish={onFinish}
             scrollToFirstError
+            initialValues={{
+                firstName: '',
+                lastName: '',
+                userName: '',
+                password: '',
+                confirm: '',
+              }}
         >
 
             <Form.Item

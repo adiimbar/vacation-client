@@ -55,9 +55,9 @@ export default class AddVacationComponent extends Component<any, updateState, Va
     // this.props.closeModal()
   };
 
-  successfulRegistrationMessage = () => {
-    message.success('Registered successfully. please login...!', 3);
-  };
+  // successfulRegistrationMessage = () => {
+  //   message.success('Registered successfully. please login...!', 3);
+  // };
 
   componentDidMount() {
       this.setState({

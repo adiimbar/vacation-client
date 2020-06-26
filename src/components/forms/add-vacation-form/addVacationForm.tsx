@@ -71,6 +71,9 @@ const VacationUpdateForm = (props: any) => {
             // full image path should be done in the server
             let imagePath = `http://localhost:3001/uploads/${uploadedFileName}`
             props.vacationUpdateHandler(values, imagePath);
+            // document.getElementById("addVacationForm").reset();
+            // const asdf = document.getElementById("addVacationForm");
+            // asdf.clear().
         } else {
             // props.vacationUpdateHandler(values, id, image_path);
         }
@@ -81,19 +84,19 @@ const VacationUpdateForm = (props: any) => {
     return (
         <div className='vacationFormClass'>
         <Form
+            id="addVacationForm"
             // {...formItemLayout}
             // form={form}
             name="register"
             onFinish={onFinish}
-            // initialValues={{
-            //     destination: destination,
-            //     description: description,
-            //     price: price,
-            //     image_path: uploadedFileName,
-            //     // range_picker: [start_date.toString().slice(0, 10), end_date.toString().slice(0, 10)],
-            //     start_date: start_date.toString().slice(0, 10),
-            //     end_date: end_date.toString().slice(0, 10),
-            //   }}
+            initialValues={{
+                destination: '',
+                description: '',
+                price: '',
+                image_path: '',
+                start_date: '',
+                end_date: '',
+              }}
             scrollToFirstError
         >
 
@@ -146,7 +149,7 @@ const VacationUpdateForm = (props: any) => {
 
             <Form.Item >
                 <Button type="primary" htmlType="submit">
-                    Update vacation
+                    Add vacation
                 </Button>
             </Form.Item>
         </Form>
