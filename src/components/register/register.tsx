@@ -102,7 +102,7 @@ export default class Register extends Component<any, RegisterState, UserRegistra
           register
         </Button>
 
-        <Modal
+        { (this.state.visible) ? <Modal
           // title="Title"
           visible={visible}
           onOk={this.handleOk}
@@ -119,7 +119,7 @@ export default class Register extends Component<any, RegisterState, UserRegistra
           // ]}
         >
           <RegistrationForm registrationHandler={this.register} />
-        </Modal>
+        </Modal> : null }
       </React.Fragment>
       // </div>
     );

@@ -105,7 +105,7 @@ export default class AddVacationComponent extends Component<any, updateState, Va
           Add vacation
         </Button>
 
-        <Modal
+        { (this.state.visible) ? <Modal
           visible={visible}
           onOk={this.handleOk}
           confirmLoading={confirmLoading}
@@ -114,7 +114,9 @@ export default class AddVacationComponent extends Component<any, updateState, Va
         >
           <AddVacationForm vacationUpdateHandler={this.vacationUpdate} formEdit={this.props.formEdit}/>
           {/* <AddVacationForm vacationUpdateHandler={this.vacationUpdate} openModal={this.showModal} /> */}
-        </Modal>
+        </Modal>  : null }
+
+
       </React.Fragment>
     );
   }
