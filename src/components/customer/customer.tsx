@@ -75,7 +75,7 @@ export default class Vacations extends Component <any, VacationsState>{
 
     public render() {
         return (
-            <div className='cardsContainer'>
+            <div className='mainContainer'>
                 <VacationsCards />               
             </div>
         );
