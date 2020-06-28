@@ -34,18 +34,8 @@ export default class AddVacationComponent extends Component<any, updateState, Va
 
   handleOk = () => {
     this.setState({
-      //   ModalText: 'The modal will be closed after two seconds',
       confirmLoading: true,
     });
-    // setTimeout(() => {
-    //   this.setState({
-    //     visible: false,
-    //     confirmLoading: false,
-    //   });
-    //   // this.register();
-    //   this.successfulRegistrationMessage();
-    //   ;
-    // }, 2000);
   };
 
   handleCancel = () => {
@@ -54,10 +44,6 @@ export default class AddVacationComponent extends Component<any, updateState, Va
     });
     // this.props.closeModal()
   };
-
-  // successfulRegistrationMessage = () => {
-  //   message.success('Registered successfully. please login...!', 3);
-  // };
 
   componentDidMount() {
       this.setState({
@@ -90,7 +76,6 @@ export default class AddVacationComponent extends Component<any, updateState, Va
         }
     }
     catch (err) {
-        // alert(err.message);
         console.log(err);
         console.log(err.response.status);
     }
@@ -113,7 +98,6 @@ export default class AddVacationComponent extends Component<any, updateState, Va
           footer={null}
         >
           <AddVacationForm vacationUpdateHandler={this.vacationUpdate} formEdit={this.props.formEdit}/>
-          {/* <AddVacationForm vacationUpdateHandler={this.vacationUpdate} openModal={this.showModal} /> */}
         </Modal>  : null }
 
 

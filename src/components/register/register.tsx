@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import axios from "axios";
 import { UserRegistrationDetails } from '../../models/UserRegistrationDetails';
 import 'antd/dist/antd.css';
 import { Modal, Button, message } from 'antd';
@@ -34,18 +33,8 @@ export default class Register extends Component<any, RegisterState, UserRegistra
 
   handleOk = () => {
     this.setState({
-      //   ModalText: 'The modal will be closed after two seconds',
       confirmLoading: true,
     });
-    setTimeout(() => {
-      this.setState({
-        visible: false,
-        confirmLoading: false,
-      });
-      // this.register();
-      this.successfulRegistrationMessage();
-      ;
-    }, 2000);
   };
 
   handleCancel = () => {
@@ -54,15 +43,7 @@ export default class Register extends Component<any, RegisterState, UserRegistra
     });
   };
 
-  successfulRegistrationMessage = () => {
-    message.success('Registered successfully. please login...!', 3);
-  };
-
-
   private register = async (registerObject: any) => {
-
-    // console.log('inside register');
-    // console.log(registerObject);
 
     try {
         let userRegistrationDetails = new UserRegistrationDetails(                                                                
@@ -79,49 +60,32 @@ export default class Register extends Component<any, RegisterState, UserRegistra
           this.handleCancel();
         }
 
-        // const serverResponse = response.data;
-        // const statusResponse = response.status;
-        // console.log(serverResponse);
-        // console.log(statusResponse);
-
-    }
-    catch (err) {
-        // alert(err.message);
-        console.log(err);
-        console.log(err.response.status);
-    }
-}
+      }
+      catch (err) {
+          console.log(err);
+          console.log(err.response.status);
+      }
+  }
 
 
   public render() {
     const { visible, confirmLoading } = this.state;
     return (
-      // <div className="register">
       <React.Fragment>
         <Button onClick={this.showModal} className="registerButtonClass">
           register
         </Button>
 
         { (this.state.visible) ? <Modal
-          // title="Title"
           visible={visible}
           onOk={this.handleOk}
           confirmLoading={confirmLoading}
           onCancel={this.handleCancel}
           footer={null}
-          // footer={[
-            // <Button key="back" onClick={this.handleCancel}>
-            //   Cancel
-            // </Button>,
-            // <Button key="submit" type="primary" loading={confirmLoading} onClick={this.handleOk}>
-            //   Submit
-            // </Button>,
-          // ]}
         >
           <RegistrationForm registrationHandler={this.register} />
         </Modal> : null }
       </React.Fragment>
-      // </div>
     );
   }
 }

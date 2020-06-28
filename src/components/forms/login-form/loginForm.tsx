@@ -19,16 +19,11 @@ const LoginForm = (props: any) => {
         inputRef.current.focus();
     }, [])
 
-    // const onFinishFailed = (errorInfo: any) => {
-    //     console.log('Failed:', errorInfo);
-    // };
-
     return (
         <Form
             {...layout}
             name="loginForm"
             onFinish={onFinish}
-            // onFinishFailed={onFinishFailed}
         >
             <Form.Item
                 name="userName"
@@ -44,8 +39,6 @@ const LoginForm = (props: any) => {
                 <Input.Password placeholder="Password" />
             </Form.Item>
 
-
-            {/* <Form.Item {...tailLayout}> */}
             <Form.Item>
                 <Button type="primary" htmlType="submit" className="loginButtonClass" >login</Button>
                 <Register />

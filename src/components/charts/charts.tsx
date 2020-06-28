@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-// import axios from "axios";
 import { ToursFollowersDetails } from '../../models/toursFollowersDetails';
-// import { ToursFollowersDetails } from '../../models/ToursFollowersDetails';
 import { Unsubscribe } from "redux";
 import { store } from '../../redux/store';
 import { ActionType } from '../../redux/action-type';
@@ -10,13 +8,10 @@ import apiService from '../../services/api.service';
 import { Button } from 'antd';
 import {Bar} from 'react-chartjs-2';
 import './charts.css';
-// import Chart from 'chart.js';
 
 
 interface ToursFollowersState {
     toursFollowers: ToursFollowersDetails[],
-    // vacationsDestinations: any,
-    // vacationsFollowersNumbers: any
 }
 
 const graphOptions: any = {
@@ -37,10 +32,7 @@ export default class Charts extends Component <any, ToursFollowersState>{
     constructor(props: any) {
         super(props);
         this.state = {
-            toursFollowers:[],
-            // vacationsDestinations:[],
-            // vacationsFollowersNumbers:[] 
-        
+            toursFollowers:[],        
         };
 
         this.backToAdminHandler = this.backToAdminHandler.bind(this)
@@ -54,7 +46,6 @@ export default class Charts extends Component <any, ToursFollowersState>{
         this.getNumberOfFollowersForAllTours();
         
         this.unsubscribeStore = store.subscribe(
-            // In fact, the following function is our "listener", "refresh function"
             () => this.setState({
                 toursFollowers: store.getState().toursFollowers
             })
@@ -98,12 +89,10 @@ export default class Charts extends Component <any, ToursFollowersState>{
 
     }
 
-
     backToAdminHandler() {
         this.props.history.push('/admin');
     }
     
-
     public render() {
         return (
             <div className='chartsContainer'>
@@ -116,10 +105,8 @@ export default class Charts extends Component <any, ToursFollowersState>{
                     <h2>Vacations followers statistics</h2>
                     <Bar
                     data={this.getChartData()}
-                    // width={100}
                     height={350}
                     options={
-                        // maintainAspectRatio: false,
                         graphOptions
                     }
                     />

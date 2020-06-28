@@ -3,35 +3,7 @@ import { Form, Input, Button } from 'antd';
 import './registerForm.css';
 
 
-
-// const formItemLayout = {
-//     labelCol: {
-//         xs: { span: 24 },
-//         sm: { span: 8 },
-//     },
-//     wrapperCol: {
-//         xs: { span: 24 },
-//         sm: { span: 16 },
-//     },
-// };
-
-// const tailFormItemLayout = {
-//     wrapperCol: {
-//         xs: {
-//             span: 24,
-//             offset: 0,
-//         },
-//         sm: {
-//             span: 16,
-//             offset: 8,
-//         },
-//     },
-// };
-
-
-
 const RegistrationForm = (props: any) => {
-    // const [form] = Form.useForm();
     let firstNameInput: any = null;
 
     useEffect( () => {
@@ -40,15 +12,12 @@ const RegistrationForm = (props: any) => {
     
         
     const onFinish = (values: any) => {
-        // console.log('Received values of form: ', values);
           props.registrationHandler(values);
     };
 
     return (
         <div className='registrationClass'>
         <Form
-            // {...formItemLayout}
-            // form={form}
             name="register"
             onFinish={onFinish}
             scrollToFirstError
@@ -73,7 +42,6 @@ const RegistrationForm = (props: any) => {
                 />
             </Form.Item>
 
-
             <Form.Item
                 name="lastName"
                 rules={[{ required: true, message: 'Please enter last name' }]}
@@ -81,14 +49,12 @@ const RegistrationForm = (props: any) => {
                 <Input placeholder="Last name" />
             </Form.Item>
 
-
             <Form.Item
                 name="userName"
                 rules={[{ required: true, message: 'Please enter username' }]}
             >
                 <Input placeholder="username" />
             </Form.Item>
-
 
             <Form.Item
                 name="password"

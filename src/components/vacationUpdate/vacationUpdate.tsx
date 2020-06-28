@@ -34,18 +34,8 @@ export default class VacationUpdate extends Component<any, updateState, Vacation
 
   handleOk = () => {
     this.setState({
-      //   ModalText: 'The modal will be closed after two seconds',
       confirmLoading: true,
     });
-    // setTimeout(() => {
-    //   this.setState({
-    //     visible: false,
-    //     confirmLoading: false,
-    //   });
-    //   // this.register();
-    //   this.successfulRegistrationMessage();
-    //   ;
-    // }, 2000);
   };
 
   handleCancel = () => {
@@ -53,10 +43,6 @@ export default class VacationUpdate extends Component<any, updateState, Vacation
       visible: false,
     });
     this.props.closeModal()
-  };
-
-  successfulRegistrationMessage = () => {
-    message.success('Registered successfully. please login...!', 3);
   };
 
   componentDidMount() {
@@ -83,7 +69,7 @@ export default class VacationUpdate extends Component<any, updateState, Vacation
     }
 
     try {
-          
+
         const response = await apiService.put<VacationsDetails[]>("tours", vacationUpdateDetails);
 
         if(response.status === 200) {
@@ -92,7 +78,6 @@ export default class VacationUpdate extends Component<any, updateState, Vacation
         }
     }
     catch (err) {
-        // alert(err.message);
         console.log(err);
         console.log(err.response.status);
     }
@@ -103,12 +88,7 @@ export default class VacationUpdate extends Component<any, updateState, Vacation
     const { visible, confirmLoading } = this.state;
     return (
       <React.Fragment>
-        {/* <Button onClick={this.showModal}>
-          Update vacation
-        </Button> */}
-
         <Modal
-          // title="Title"
           visible={visible}
           onOk={this.handleOk}
           confirmLoading={confirmLoading}

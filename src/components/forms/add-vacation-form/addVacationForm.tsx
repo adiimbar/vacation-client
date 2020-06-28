@@ -42,17 +42,11 @@ const VacationUpdateForm = (props: any) => {
     }; 
 
     async function uploadFile(formData: any) {
-        // console.log('form data:');
-        // console.log(formData);
         const response = await apiService.post("uploads", formData);
 
-        // console.log('response');
-        // console.log(response.data);
         if(response.status === 200) {
             message.success(`file uploaded successfully`);
             setUploadedFileName(uploadedFileName = response.data.name);
-            // console.log('uploadedFileName');
-            // console.log(uploadedFileName);
         }
     }
 
@@ -63,30 +57,22 @@ const VacationUpdateForm = (props: any) => {
           ...fieldsValue,
           'range_picker': [rangeValue[0].format('YYYY-MM-DD'), rangeValue[1].format('YYYY-MM-DD')],
         };
-        // console.log('Received values of form: ', values);
 
-        // console.log('image path');
-        // console.log(uploadedFileName);
         if(uploadedFileName !== '') {
             // full image path should be done in the server
             let imagePath = `http://localhost:3001/uploads/${uploadedFileName}`
             props.vacationUpdateHandler(values, imagePath);
-            // document.getElementById("addVacationForm").reset();
-            // const asdf = document.getElementById("addVacationForm");
-            // asdf.clear().
+
         } else {
             // props.vacationUpdateHandler(values, id, image_path);
         }
     
     };
 
-    // const { id, destination, description, image_path, start_date, end_date, price} = props.formEdit;
     return (
         <div className='vacationFormClass'>
         <Form
             id="addVacationForm"
-            // {...formItemLayout}
-            // form={form}
             name="register"
             onFinish={onFinish}
             initialValues={{
@@ -119,7 +105,6 @@ const VacationUpdateForm = (props: any) => {
                       message: 'Please select time!'
                     }
                 ]}
-                // {...rangeConfig}
             >
                 <RangePicker />
             </Form.Item>

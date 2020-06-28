@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-// import axios from "axios";
 import { VacationsDetails } from '../../models/VacationsDetails';
 import { FollowDetails } from '../../models/FollowDetails';
 import VacationUpdate from '../vacationUpdate/vacationUpdate';
@@ -20,7 +19,6 @@ const { Meta } = Card;
 
 
 function VacationsCards()  {
-    // let vacations: VacationsDetails[] = [];
     let vacations = store.getState().vacations;
 
     const userType = store.getState().userType;
@@ -32,11 +30,7 @@ function VacationsCards()  {
     let unsubscribeStore: Unsubscribe;
 
     unsubscribeStore = store.subscribe(
-        // In fact, the following function is our "listener", "refresh function"
         () => {
-            // vacations = store.getState().vacations;
-            // followedTours = store.getState().userToursFollowings;
-            // setUserType(store.getState().userType)
         }
     );
     
@@ -48,7 +42,6 @@ function VacationsCards()  {
 
     useEffect( () => {
         getVacations();
-        // getFollowers();
         
     }, []);
 
@@ -62,14 +55,8 @@ function VacationsCards()  {
 
         if(response.status === 200) {
         store.dispatch({ type: ActionType.DeleteVacation, payload: response.data});
-        // store.dispatch({ type: ActionType.DeleteVacation, payload: vacationId});
         }
     }
-
-    // async function getFollowers() {
-    //     const response = await apiService.get<FollowDetails[]>("follow/userFollowings");
-    //     store.dispatch({ type: ActionType.GetUserFollowings, payload: response.data});
-    // }
 
     async function follow(vacationObj: any) {
         const response = await apiService.post<FollowDetails[]>("follow/addFollower", vacationObj);
@@ -147,56 +134,56 @@ function VacationsCards()  {
     if (!(vacations && vacations.length)) return <> </>;
 
     return (
-        <div className='cardsContainer' id='cardsContainer'>
+        <ul className='cardsContainer' id='cardsContainer'>
 
         <div id='modalContainer'></div>
                 
         {vacations.map((vacation) => 
 
+            <li className="cards_item">
+                <Card
+                    className='cardDiv'
+                    id={vacation.id.toString()}
+                    key={vacation.id}
+                    style={{ width: 300 }}
+                    cover={
+                    <img className="cardImageClass"
+                        alt="Oops I'm missing"
+                        src={vacation.image_path}
+                    />
+                    }
+                >
+                    <Meta
+                    title={vacation.destination}
+                    avatar={
+                        userType === 'CUSTOMER' ? 
+                        <UserCardFollow {...vacation} /> : 
+                            <UserAdminEdit  {...vacation} />
+                            }
+                    />
 
-            <Card
-                className='cardDiv'
-                id={vacation.id.toString()}
-                key={vacation.id}
-                style={{ width: 300 }}
-                cover={
-                <img className="cardImageClass"
-                    alt="Oops I'm missing"
-                    src={vacation.image_path}
-                />
-                }
-            >
-                <Meta
-                title={vacation.destination}
-                avatar={
-                    userType === 'CUSTOMER' ? 
-                    <UserCardFollow {...vacation} /> : 
-                        <UserAdminEdit  {...vacation} />
-                        }
-                />
-
-                <div className='CardBodyClass'>
-                    <br />
-                    <div className="descriptionClass">
-                        <p>{vacation.description}</p>
-                    </div>
-                    <div className="detailsClass">
-                        <div className="priceClass">
-                            {`price: ${vacation.price}`}
+                    <div className='CardBodyClass'>
+                        <br />
+                        <div className="descriptionClass">
+                            <p>{vacation.description}</p>
                         </div>
-                        <div className="followersClass">
-                            {`followers: ${vacation.followers}`}
+                        <div className="detailsClass">
+                            <div className="priceClass">
+                                {`price: $${vacation.price}`}
+                            </div>
+                            <div className="followersClass">
+                                {`followers: ${vacation.followers}`}
+                            </div>
+                        </div>
+                        <br />
+                        <div className="datesClass">
+                            {`starts: ${vacation.start_date.toString().slice(0, 10)} ends: ${vacation.end_date.toString().slice(0, 10)}`}
                         </div>
                     </div>
-                    <br />
-                    <div className="datesClass">
-                        {`starts: ${vacation.start_date.toString().slice(0, 10)} ends: ${vacation.end_date.toString().slice(0, 10)}`}
-                    </div>
-                </div>
-            </Card>
-
+                </Card>
+            </li>
         )}
-    </div>
+    </ul>
 )
 
 }
