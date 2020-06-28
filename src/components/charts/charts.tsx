@@ -9,6 +9,7 @@ import apiService from '../../services/api.service';
 
 import { Button } from 'antd';
 import {Bar} from 'react-chartjs-2';
+import './charts.css';
 // import Chart from 'chart.js';
 
 

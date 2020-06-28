@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './admin.css';
+import '../../styles/vacationCards.css';
 // import axios from "axios";
 import { VacationsDetails } from '../../models/VacationsDetails';
 import { Unsubscribe } from "redux";
@@ -56,7 +57,7 @@ export default class Admin extends Component <any, VacationsState>{
 
     public render() {
         return (
-            <div className='adminContainer'>
+            <div className='mainContainer'>
                 <div className="adminToolbar">
                     <AddVacationComponent />
                     <Button type="primary" className="statisticsButton" onClick={this.watchChartsHandler}>watch statistics</Button>

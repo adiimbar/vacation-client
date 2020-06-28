@@ -26,19 +26,14 @@
 .layout>main {
     grid-column: span 12;
     background: #fff;
-    /* flex: 1 1 auto;  grow vertically */
-    /* padding: 24px 50px; */
-    /* min-height: 280px; */
+
 }
 
 .layout>footer {
-    /* margin-top: 100px; */
     grid-column: span 12;
     left: 0;
     bottom: 0;
-    /* position: fixed; */
     background-color: #71A9F7;
     width: 100%;
-    /* position: relative; */
 }
 

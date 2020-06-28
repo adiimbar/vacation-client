@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './customer.css';
+import '../../styles/vacationCards.css';
 import VacationsCards from '../vacationsFunction/vacations';
 import { VacationsDetails } from '../../models/VacationsDetails';
 import { FollowDetails } from '../../models/FollowDetails';

@@ -1,0 +1,184 @@
+/* the css is terrible, could not manage to center the cards inside their div - need to change this */
+
+.mainContainer {
+    max-width: 90%;
+    margin-left: 6%;
+    margin-right: auto;
+}
+
+@media screen and (max-width: 1850px) {
+    .mainContainer {
+      margin-left: 13%;
+      margin-right: 10%;
+    }
+}
+
+@media screen and (max-width: 1800px) {
+  .mainContainer {
+    margin-left: 12%;
+    margin-right: 6%;
+  }
+}
+
+@media screen and (max-width: 1750px) {
+  .mainContainer {
+    margin-left: 11%;
+    margin-right: 6%;
+  }
+}
+
+@media screen and (max-width: 1700px) {
+  .mainContainer {
+    margin-left: 10%;
+    margin-right: 6%;
+  }
+}
+
+@media screen and (max-width: 1650px) {
+  .mainContainer {
+    margin-left: 9%;
+    margin-right: 6%;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .mainContainer {
+    margin-left: 8%;
+    margin-right: 6%;
+  }
+}
+
+@media screen and (max-width: 1555px) {
+  .mainContainer {
+    margin-left: 17%;
+    margin-right: 10%;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .mainContainer {
+    margin-left: 16%;
+    margin-right: 10%;
+  }
+}
+
+@media screen and (max-width: 1450px) {
+  .mainContainer {
+    margin-left: 14%;
+    margin-right: 10%;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .mainContainer {
+    margin-left: 13%;
+    margin-right: 8%;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .mainContainer {
+    margin-left: 13%;
+    margin-right: 8%;
+  }
+}
+
+@media screen and (max-width: 1350px) {
+  .mainContainer {
+    margin-left: 12%;
+    margin-right: 8%;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .mainContainer {
+    margin-left: 11%;
+    margin-right: 8%;
+  }
+}
+
+@media screen and (max-width: 1250px) {
+  .mainContainer {
+    max-width: 100%;
+    margin-left: 9%;
+    margin-right: 8%;
+  }
+}
+
+@media screen and (max-width: 1210px) {
+  .mainContainer {
+    margin-left: 22%;
+    margin-right: 8%;
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  .mainContainer {
+    margin-left: 20%;
+    margin-right: 8%;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .mainContainer {
+    margin-left: 19%;
+    margin-right: 8%;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .mainContainer {
+    margin-left: 18%;
+    margin-right: 8%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .mainContainer {
+    margin-left: 16%;
+    margin-right: 8%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .mainContainer {
+    margin-left: 12%;
+    margin-right: 8%;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .mainContainer {
+    max-width: 100%;
+    margin-left: 10%;
+    margin-right: 5%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .mainContainer {
+    margin-left: 30%;
+    margin-right: 10%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .mainContainer {
+    margin-left: 25%;
+    margin-right: 10%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .mainContainer {
+    margin-left: 20%;
+    margin-right: 10%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .mainContainer {
+    margin-left: 16%;
+    margin-right: 10%;
+  }
+}

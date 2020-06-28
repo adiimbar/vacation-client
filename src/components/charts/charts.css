@@ -1,3 +1,7 @@
-.editingToolbar {
+.chartsContainer {
     text-align: center;
+}
+
+.editingToolbar {
+    margin: 12px;
 }
