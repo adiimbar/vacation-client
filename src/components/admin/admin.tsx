@@ -7,8 +7,8 @@ import { store } from '../../redux/store';
 
 import VacationsCards from '../vacationsFunction/vacations';
 import VacationUpdate from '../vacationUpdate/vacationUpdate';
-import AddVacationComponent from '../addVacationComponent/addVacationComponent';
-import { Button } from 'antd';
+// import AddVacationComponent from '../addVacationComponent/addVacationComponent';
+// import { Button } from 'antd';
 
 
 interface VacationsState {
@@ -26,7 +26,7 @@ export default class Admin extends Component <any, VacationsState>{
             vacations:[]
         };
 
-        this.watchChartsHandler = this.watchChartsHandler.bind(this);
+        // this.watchChartsHandler = this.watchChartsHandler.bind(this);
 
         this.unsubscribeStore = store.subscribe(
 
@@ -44,17 +44,17 @@ export default class Admin extends Component <any, VacationsState>{
     componentDidMount() {
     }
 
-    watchChartsHandler() {
-        this.props.history.push('/charts');
-    }
+    // watchChartsHandler() {
+    //     this.props.history.push('/charts');
+    // }
 
     public render() {
         return (
             <div className='mainContainer'>
-                <div className="adminToolbar">
+                {/* <div className="adminToolbar">
                     <AddVacationComponent />
                     <Button type="primary" className="statisticsButton" onClick={this.watchChartsHandler}>watch statistics</Button>
-                </div>
+                </div> */}
                 <VacationUpdate />
                 <VacationsCards />
             </div>

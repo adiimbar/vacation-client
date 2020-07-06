@@ -1,9 +1,19 @@
 .headerClass {
     margin-left: 30px;
     margin-top: 10px;
+    /* position: relative; */
+}
+
+.logoDivClass {
+    float: left;
 }
 
 .logoClass {
     height: 40px;
     width: 170px;
+}
+
+.adminButtonsClass {
+    position: absolute;
+    right: 50px;
 }

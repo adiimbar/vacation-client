@@ -69,7 +69,8 @@ export default function Layout() {
         <BrowserRouter>
             <section className="layout">
                 <header>
-                    <Header />
+                    {/* <Header /> */}
+                    <Route path="/" component={Header} />
                 </header>
 
                 <main>

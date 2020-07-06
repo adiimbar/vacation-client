@@ -5,7 +5,7 @@ import { store } from '../../redux/store';
 import { ActionType } from '../../redux/action-type';
 import apiService from '../../services/api.service';
 
-import { Button } from 'antd';
+// import { Button } from 'antd';
 import {Bar} from 'react-chartjs-2';
 import './charts.css';
 
@@ -35,7 +35,7 @@ export default class Charts extends Component <any, ToursFollowersState>{
             toursFollowers:[],        
         };
 
-        this.backToAdminHandler = this.backToAdminHandler.bind(this)
+        // this.backToAdminHandler = this.backToAdminHandler.bind(this)
     }
 
     componentWillUnmount(){
@@ -97,9 +97,9 @@ export default class Charts extends Component <any, ToursFollowersState>{
         return (
             <div className='chartsContainer'>
 
-                <div className="editingToolbar">
+                {/* <div className="editingToolbar">
                     <Button type="primary" onClick={this.backToAdminHandler}>Editing panle</Button>
-                </div>
+                </div> */}
 
                 <div>
                     <h2>Vacations followers statistics</h2>
